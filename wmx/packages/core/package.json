@@ -1,0 +1,23 @@
+{
+  "name": "wmx-os-core",
+  "version": "0.1.6",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "dev": "tsc --project tsconfig.json --watch"
+  },
+  "dependencies": {
+    "chalk": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "typescript": "^5.4.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "package.json"
+  ]
+}

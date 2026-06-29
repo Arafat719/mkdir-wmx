@@ -1,0 +1,37 @@
+{
+  "name": "wmx-os",
+  "version": "0.1.8",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "wmx": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsc --build tsconfig.json",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "wmx-os-core": "workspace:*",
+    "wmx-os-scanners": "workspace:*",
+    "wmx-os-generators": "workspace:*",
+    "chalk": "^5.6.2",
+    "commander": "^11.0.0",
+    "fs-extra": "^11.0.0",
+    "execa": "^8.0.0",
+    "inquirer": "^9.0.0",
+    "ora": "^8.0.0",
+    "ink": "^4.4.1",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.4.0"
+  }
+}

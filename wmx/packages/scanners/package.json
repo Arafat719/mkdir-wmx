@@ -1,0 +1,35 @@
+{
+  "name": "wmx-os-scanners",
+  "version": "0.1.4",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "execa": "^8.0.0",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.0.0",
+    "glob": "^10.4.1",
+    "wmx-os-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "package.json"
+  ]
+}

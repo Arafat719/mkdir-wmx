@@ -1,0 +1,500 @@
+{
+  "folderTree": "wmx/\n├── apps/\n├── package.json\n├── packages/\n│   ├── cli/\n│   │   ├── package.json\n│   │   ├── src/\n│   │   │   ├── commands/\n│   │   │   ├── index.ts\n│   │   │   └── types/\n│   │   └── tsconfig.json\n│   ├── core/\n│   │   ├── package.json\n│   │   ├── src/\n│   │   │   ├── config.ts\n│   │   │   ├── context.ts\n│   │   │   ├── index.ts\n│   │   │   ├── logger.ts\n│   │   │   └── plugin.ts\n│   │   └── tsconfig.json\n│   ├── generators/\n│   │   ├── package.json\n│   │   ├── src/\n│   │   │   ├── docsGenerator.ts\n│   │   │   ├── index.ts\n│   │   │   └── scaffold.ts\n│   │   ├── templates/\n│   │   │   ├── nextjs-postgres/\n│   │   │   └── react-express-mongo/\n│   │   └── tsconfig.json\n│   └── scanners/\n│       ├── package.json\n│       ├── src/\n│       │   ├── astScanner.ts\n│       │   ├── envScanner.ts\n│       │   ├── index.ts\n│       │   ├── projectScanner.ts\n│       │   ├── scanners/\n│       │   ├── statsScanner.ts\n│       │   ├── types.ts\n│       │   └── utils/\n│       └── tsconfig.json\n├── pnpm-lock.yaml\n├── pnpm-workspace.yaml\n├── tsconfig.base.json\n└── turbo.json",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/health",
+      "file": "packages/generators/templates/react-express-mongo/backend/src/index.ts",
+      "line": 14
+    }
+  ],
+  "imports": [
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "./commands/init.js"
+    },
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "./commands/doctor.js"
+    },
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "./commands/check.js"
+    },
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "./commands/analyze.js"
+    },
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "./commands/docs.js"
+    },
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "./commands/deps.js"
+    },
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "./commands/stats.js"
+    },
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "./commands/deploy.js"
+    },
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "./commands/upgrade.js"
+    },
+    {
+      "from": "packages/cli/src/index.ts",
+      "to": "./commands/snapshot.js"
+    },
+    {
+      "from": "packages/core/src/config.ts",
+      "to": "fs"
+    },
+    {
+      "from": "packages/core/src/config.ts",
+      "to": "path"
+    },
+    {
+      "from": "packages/core/src/context.ts",
+      "to": "./config.js"
+    },
+    {
+      "from": "packages/core/src/context.ts",
+      "to": "./logger.js"
+    },
+    {
+      "from": "packages/core/src/context.ts",
+      "to": "./config.js"
+    },
+    {
+      "from": "packages/core/src/logger.ts",
+      "to": "chalk"
+    },
+    {
+      "from": "packages/core/src/plugin.ts",
+      "to": "./context.js"
+    },
+    {
+      "from": "packages/generators/src/docsGenerator.ts",
+      "to": "fs-extra"
+    },
+    {
+      "from": "packages/generators/src/docsGenerator.ts",
+      "to": "path"
+    },
+    {
+      "from": "packages/generators/src/docsGenerator.ts",
+      "to": "@wmx/scanners"
+    },
+    {
+      "from": "packages/generators/src/scaffold.ts",
+      "to": "path"
+    },
+    {
+      "from": "packages/generators/src/scaffold.ts",
+      "to": "url"
+    },
+    {
+      "from": "packages/generators/src/scaffold.ts",
+      "to": "fs-extra"
+    },
+    {
+      "from": "packages/generators/src/scaffold.ts",
+      "to": "execa"
+    },
+    {
+      "from": "packages/scanners/src/astScanner.ts",
+      "to": "fs/promises"
+    },
+    {
+      "from": "packages/scanners/src/astScanner.ts",
+      "to": "path"
+    },
+    {
+      "from": "packages/scanners/src/astScanner.ts",
+      "to": "fast-glob"
+    },
+    {
+      "from": "packages/scanners/src/envScanner.ts",
+      "to": "fs/promises"
+    },
+    {
+      "from": "packages/scanners/src/envScanner.ts",
+      "to": "path"
+    },
+    {
+      "from": "packages/scanners/src/projectScanner.ts",
+      "to": "fs/promises"
+    },
+    {
+      "from": "packages/scanners/src/projectScanner.ts",
+      "to": "path"
+    },
+    {
+      "from": "packages/scanners/src/projectScanner.ts",
+      "to": "fast-glob"
+    },
+    {
+      "from": "packages/scanners/src/statsScanner.ts",
+      "to": "fs/promises"
+    },
+    {
+      "from": "packages/scanners/src/statsScanner.ts",
+      "to": "path"
+    },
+    {
+      "from": "packages/scanners/src/statsScanner.ts",
+      "to": "fast-glob"
+    },
+    {
+      "from": "packages/cli/src/commands/analyze.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/cli/src/commands/analyze.ts",
+      "to": "ora"
+    },
+    {
+      "from": "packages/cli/src/commands/analyze.ts",
+      "to": "path"
+    },
+    {
+      "from": "packages/cli/src/commands/analyze.ts",
+      "to": "@wmx/scanners"
+    },
+    {
+      "from": "packages/cli/src/commands/analyze.ts",
+      "to": "@wmx/generators"
+    },
+    {
+      "from": "packages/cli/src/commands/check.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/cli/src/commands/check.ts",
+      "to": "execa"
+    },
+    {
+      "from": "packages/cli/src/commands/check.ts",
+      "to": "@wmx/scanners"
+    },
+    {
+      "from": "packages/cli/src/commands/deploy.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/cli/src/commands/deps.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/cli/src/commands/docs.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/cli/src/commands/doctor.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/cli/src/commands/doctor.ts",
+      "to": "ora"
+    },
+    {
+      "from": "packages/cli/src/commands/doctor.ts",
+      "to": "@wmx/scanners"
+    },
+    {
+      "from": "packages/cli/src/commands/doctor.ts",
+      "to": "@wmx/scanners"
+    },
+    {
+      "from": "packages/cli/src/commands/init.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/cli/src/commands/init.ts",
+      "to": "inquirer"
+    },
+    {
+      "from": "packages/cli/src/commands/init.ts",
+      "to": "ora"
+    },
+    {
+      "from": "packages/cli/src/commands/init.ts",
+      "to": "chalk"
+    },
+    {
+      "from": "packages/cli/src/commands/init.ts",
+      "to": "@wmx/core"
+    },
+    {
+      "from": "packages/cli/src/commands/init.ts",
+      "to": "@wmx/generators"
+    },
+    {
+      "from": "packages/cli/src/commands/snapshot.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/cli/src/commands/stats.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/cli/src/commands/stats.ts",
+      "to": "ora"
+    },
+    {
+      "from": "packages/cli/src/commands/stats.ts",
+      "to": "@wmx/scanners"
+    },
+    {
+      "from": "packages/cli/src/commands/stats.ts",
+      "to": "@wmx/scanners"
+    },
+    {
+      "from": "packages/cli/src/commands/upgrade.ts",
+      "to": "commander"
+    },
+    {
+      "from": "packages/generators/templates/nextjs-postgres/drizzle.config.ts",
+      "to": "drizzle-kit"
+    },
+    {
+      "from": "packages/scanners/src/scanners/DependencyScanner.ts",
+      "to": "path"
+    },
+    {
+      "from": "packages/scanners/src/scanners/DependencyScanner.ts",
+      "to": "../utils/readJson.js"
+    },
+    {
+      "from": "packages/scanners/src/scanners/DependencyScanner.ts",
+      "to": "../utils/fileExists.js"
+    },
+    {
+      "from": "packages/scanners/src/scanners/DependencyScanner.ts",
+      "to": "../types.js"
+    },
+    {
+      "from": "packages/scanners/src/scanners/FrameworkScanner.ts",
+      "to": "path"
+    },
+    {
+      "from": "packages/scanners/src/scanners/FrameworkScanner.ts",
+      "to": "../utils/readJson.js"
+    },
+    {
+      "from": "packages/scanners/src/scanners/FrameworkScanner.ts",
+      "to": "../types.js"
+    },
+    {
+      "from": "packages/scanners/src/utils/fileExists.ts",
+      "to": "fs/promises"
+    },
+    {
+      "from": "packages/scanners/src/utils/readJson.ts",
+      "to": "fs/promises"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/frontend/vite.config.ts",
+      "to": "vite"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/frontend/vite.config.ts",
+      "to": "@vitejs/plugin-react"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/backend/src/db.ts",
+      "to": "mongoose"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/backend/src/index.ts",
+      "to": "express"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/backend/src/index.ts",
+      "to": "cors"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/backend/src/index.ts",
+      "to": "dotenv"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/backend/src/index.ts",
+      "to": "./db"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/frontend/src/App.tsx",
+      "to": "react"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/frontend/src/main.tsx",
+      "to": "react"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/frontend/src/main.tsx",
+      "to": "react-dom/client"
+    },
+    {
+      "from": "packages/generators/templates/react-express-mongo/frontend/src/main.tsx",
+      "to": "./App"
+    },
+    {
+      "from": "packages/generators/templates/nextjs-postgres/src/app/layout.tsx",
+      "to": "next"
+    }
+  ],
+  "exports": [
+    {
+      "name": "loadConfig",
+      "file": "packages/core/src/config.ts",
+      "type": "function"
+    },
+    {
+      "name": "saveConfig",
+      "file": "packages/core/src/config.ts",
+      "type": "function"
+    },
+    {
+      "name": "createContext",
+      "file": "packages/core/src/context.ts",
+      "type": "function"
+    },
+    {
+      "name": "Logger",
+      "file": "packages/core/src/logger.ts",
+      "type": "class"
+    },
+    {
+      "name": "logger",
+      "file": "packages/core/src/logger.ts",
+      "type": "const"
+    },
+    {
+      "name": "generateAnalysis",
+      "file": "packages/generators/src/docsGenerator.ts",
+      "type": "function"
+    },
+    {
+      "name": "ScaffoldGenerator",
+      "file": "packages/generators/src/scaffold.ts",
+      "type": "class"
+    },
+    {
+      "name": "analyzeProject",
+      "file": "packages/scanners/src/astScanner.ts",
+      "type": "function"
+    },
+    {
+      "name": "scanEnvFile",
+      "file": "packages/scanners/src/envScanner.ts",
+      "type": "function"
+    },
+    {
+      "name": "scanProject",
+      "file": "packages/scanners/src/projectScanner.ts",
+      "type": "function"
+    },
+    {
+      "name": "scanStats",
+      "file": "packages/scanners/src/statsScanner.ts",
+      "type": "function"
+    },
+    {
+      "name": "register",
+      "file": "packages/cli/src/commands/analyze.ts",
+      "type": "function"
+    },
+    {
+      "name": "register",
+      "file": "packages/cli/src/commands/check.ts",
+      "type": "function"
+    },
+    {
+      "name": "register",
+      "file": "packages/cli/src/commands/deploy.ts",
+      "type": "function"
+    },
+    {
+      "name": "register",
+      "file": "packages/cli/src/commands/deps.ts",
+      "type": "function"
+    },
+    {
+      "name": "register",
+      "file": "packages/cli/src/commands/docs.ts",
+      "type": "function"
+    },
+    {
+      "name": "register",
+      "file": "packages/cli/src/commands/doctor.ts",
+      "type": "function"
+    },
+    {
+      "name": "register",
+      "file": "packages/cli/src/commands/init.ts",
+      "type": "function"
+    },
+    {
+      "name": "register",
+      "file": "packages/cli/src/commands/snapshot.ts",
+      "type": "function"
+    },
+    {
+      "name": "register",
+      "file": "packages/cli/src/commands/stats.ts",
+      "type": "function"
+    },
+    {
+      "name": "register",
+      "file": "packages/cli/src/commands/upgrade.ts",
+      "type": "function"
+    },
+    {
+      "name": "prompt",
+      "file": "packages/cli/src/types/inquirer.d.ts",
+      "type": "function"
+    },
+    {
+      "name": "Question",
+      "file": "packages/cli/src/types/inquirer.d.ts",
+      "type": "type"
+    },
+    {
+      "name": "DependencyScanner",
+      "file": "packages/scanners/src/scanners/DependencyScanner.ts",
+      "type": "class"
+    },
+    {
+      "name": "FrameworkScanner",
+      "file": "packages/scanners/src/scanners/FrameworkScanner.ts",
+      "type": "class"
+    },
+    {
+      "name": "fileExists",
+      "file": "packages/scanners/src/utils/fileExists.ts",
+      "type": "function"
+    },
+    {
+      "name": "readJson",
+      "file": "packages/scanners/src/utils/readJson.ts",
+      "type": "function"
+    },
+    {
+      "name": "metadata",
+      "file": "packages/generators/templates/nextjs-postgres/src/app/layout.tsx",
+      "type": "const"
+    },
+    {
+      "name": "connectDB",
+      "file": "packages/generators/templates/react-express-mongo/backend/src/db.ts",
+      "type": "function"
+    }
+  ]
+}

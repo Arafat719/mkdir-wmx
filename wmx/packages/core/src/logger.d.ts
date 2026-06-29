@@ -1,0 +1,8 @@
+export declare class Logger {
+    info(message: string): void;
+    success(message: string): void;
+    warn(message: string): void;
+    error(message: string): void;
+    debug(message: string): void;
+}
+export declare const logger: Logger;

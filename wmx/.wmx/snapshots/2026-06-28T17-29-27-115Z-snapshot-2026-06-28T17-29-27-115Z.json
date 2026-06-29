@@ -1,0 +1,16 @@
+{
+  "name": "snapshot-2026-06-28T17-29-27-115Z",
+  "timestamp": "2026-06-28T17:29:27.159Z",
+  "nodeVersion": "v22.22.3",
+  "dependencies": {},
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0"
+  },
+  "wmxConfig": {},
+  "stats": {
+    "fileCount": 73,
+    "totalLines": 5971
+  },
+  "gitCommit": ""
+}

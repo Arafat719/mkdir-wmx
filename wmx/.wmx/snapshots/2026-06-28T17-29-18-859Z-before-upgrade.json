@@ -1,0 +1,16 @@
+{
+  "name": "before-upgrade",
+  "timestamp": "2026-06-28T17:29:18.904Z",
+  "nodeVersion": "v22.22.3",
+  "dependencies": {},
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0"
+  },
+  "wmxConfig": {},
+  "stats": {
+    "fileCount": 72,
+    "totalLines": 5954
+  },
+  "gitCommit": ""
+}

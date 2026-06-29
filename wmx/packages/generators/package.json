@@ -1,0 +1,28 @@
+{
+  "name": "wmx-os-generators",
+  "version": "0.1.7",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "dev": "tsc --project tsconfig.json --watch"
+  },
+  "dependencies": {
+    "execa": "^8.0.0",
+    "fs-extra": "^11.0.0",
+    "wmx-os-core": "workspace:*",
+    "wmx-os-scanners": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "templates",
+    "package.json"
+  ]
+}

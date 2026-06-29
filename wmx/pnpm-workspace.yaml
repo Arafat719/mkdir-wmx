@@ -1,0 +1,7 @@
+packages:
+  - "packages/*"
+  - "apps/*"
+minimumReleaseAgeExclude:
+  - wmx-os-core@0.1.0
+  - wmx-os-generators@0.1.0
+  - wmx-os-scanners@0.1.0
