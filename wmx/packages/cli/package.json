@@ -1,11 +1,11 @@
 {
   "name": "wmx-os",
-  "version": "0.1.8",
+  "version": "0.2.2",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "wmx": "./dist/index.js"
+    "wmx": "dist/index.js"
   },
   "files": [
     "dist",

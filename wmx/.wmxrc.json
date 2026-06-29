@@ -1,0 +1,8 @@
+{
+  "framework": "Next.js",
+  "backend": "Express",
+  "database": "MongoDB",
+  "deploy": {
+    "provider": "Vercel"
+  }
+}

@@ -77,6 +77,13 @@ export const TUI_COMMANDS = [
     run: "env list",
   },
   {
+    key: "config",
+    label: "⚙  Config",
+    description: "Create or update your .wmxrc.json project config. Set framework, backend, database, package manager, and deploy provider.",
+    options: ["set  Run interactive wizard (default)", "show  Display current config", "reset  Delete .wmxrc.json"],
+    run: "config show",
+  },
+  {
     key: "info",
     label: "ℹ  Project Info",
     description: "Show project summary: framework, database, git branch, node version, and more.",
@@ -89,6 +96,34 @@ export const TUI_COMMANDS = [
     description: "Visual directory tree of your project.",
     options: ["--depth <n>  Max depth (default: 3)", "--json  Output as JSON"],
     run: "tree",
+  },
+  {
+    key: "route",
+    label: "🛣  Route Scanner",
+    description: "List all API routes (Express) and page routes (Next.js) in your project.",
+    options: ["--filter <method>  Filter by HTTP method (GET, POST, etc.)", "--json  Output as JSON"],
+    run: "route",
+  },
+  {
+    key: "api",
+    label: "⚡ API Inspector",
+    description: "List all Express API endpoints grouped by file.",
+    options: ["--method <method>  Filter by HTTP method", "--file <pattern>  Filter by file path", "--json  Output as JSON"],
+    run: "api",
+  },
+  {
+    key: "unused",
+    label: "🗑  Unused Scanner",
+    description: "Find unused asset files (images, SVGs, fonts) and unused exports in your project.",
+    options: ["--files  Show only unused asset files", "--exports  Show only unused exports", "--json  Output as JSON"],
+    run: "unused",
+  },
+  {
+    key: "size",
+    label: "📦 Size Report",
+    description: "Show the largest JS, CSS, and image files in your project.",
+    options: ["--top <n>  Results per section (default: 5)", "--json  Output as JSON"],
+    run: "size",
   },
   {
     key: "publish",
