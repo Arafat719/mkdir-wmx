@@ -26,6 +26,7 @@ export interface DependencyReport {
 interface PackageJson {
   dependencies?: Record<string, string>
   devDependencies?: Record<string, string>
+  scripts?: Record<string, string>
 }
 
 interface NpmOutdatedEntry {
@@ -77,6 +78,17 @@ function isExcludedFromUnused(name: string): boolean {
   return false
 }
 
+function extractScriptPackages(scripts: Record<string, string>, declaredDeps: Set<string>): Set<string> {
+  const used = new Set<string>()
+  for (const script of Object.values(scripts)) {
+    for (const segment of script.split(/&&|\|\||[|;]/)) {
+      const bin = segment.trim().split(/\s+/)[0]
+      if (bin && declaredDeps.has(bin)) used.add(bin)
+    }
+  }
+  return used
+}
+
 function parsePackageName(raw: string): string {
   if (raw.startsWith('@')) {
     const firstSlash = raw.indexOf('/')
@@ -95,8 +107,11 @@ export async function scanDependencies(cwd: string): Promise<DependencyReport> {
   const devDependencies = pkg.devDependencies ?? {}
   const deps: Record<string, string> = { ...dependencies, ...devDependencies }
 
-  // Step 2 — Scan source files for imports
-  const files = await fg('src/**/*.{ts,tsx,js,jsx,mjs,cjs}', { cwd, absolute: true })
+  // Step 2 — Scan source files + root config files for imports
+  const files = await fg(
+    ['src/**/*.{ts,tsx,js,jsx,mjs,cjs}', '*.config.{js,ts,mjs,cjs}'],
+    { cwd, absolute: true }
+  )
 
   const importedPackages = new Set<string>()
   const fromRegex = /from\s+['"]([^'"./][^'"]*)['"]/g
@@ -117,20 +132,23 @@ export async function scanDependencies(cwd: string): Promise<DependencyReport> {
     }
   }
 
-  // Step 3 — Unused dependencies
+  // Step 3 — Packages used as CLI tools in package.json scripts
+  const scriptPackages = extractScriptPackages(pkg.scripts ?? {}, new Set(Object.keys(deps)))
+
+  // Step 4 — Unused dependencies
   const unused = Object.keys(deps).filter(
-    name => !importedPackages.has(name) && !isExcludedFromUnused(name)
+    name => !importedPackages.has(name) && !scriptPackages.has(name) && !isExcludedFromUnused(name)
   )
 
-  // Step 4 — Missing dependencies
+  // Step 5 — Missing dependencies
   const missing = Array.from(importedPackages).filter(
     name => !(name in deps) && !NODE_BUILTINS.has(name)
   )
 
-  // Step 5 — Heavy dependencies
+  // Step 6 — Heavy dependencies
   const heavy = HEAVY_PACKAGES.filter(h => h.name in deps)
 
-  // Step 6 — Outdated dependencies
+  // Step 7 — Outdated dependencies
   const outdated = await getOutdatedDeps(cwd)
 
   return { unused, missing, heavy, outdated }

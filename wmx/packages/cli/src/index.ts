@@ -20,6 +20,17 @@ import { register as registerRoute } from "./commands/route.js";
 import { register as registerApi } from "./commands/api.js";
 import { register as registerUnused } from "./commands/unused.js";
 import { register as registerSize } from "./commands/size.js";
+import { register as registerExplain } from "./commands/explain.js";
+import { register as registerRefactor } from "./commands/refactor.js";
+import { register as registerSecurity } from "./commands/security.js";
+import { register as registerArchitecture } from "./commands/architecture.js";
+import { register as registerClean } from "./commands/clean.js";
+import { register as registerSpeed } from "./commands/speed.js";
+import { register as registerMemory } from "./commands/memory.js";
+import { register as registerMigrate } from "./commands/migrate.js";
+import { register as registerGraph } from "./commands/graph.js";
+import { register as registerRelease } from "./commands/release.js";
+import { register as registerBrain } from "./commands/brain.js";
 
 const program = new Command();
 
@@ -47,6 +58,17 @@ registerRoute(program);
 registerApi(program);
 registerUnused(program);
 registerSize(program);
+registerExplain(program);
+registerRefactor(program);
+registerSecurity(program);
+registerArchitecture(program);
+registerClean(program);
+registerSpeed(program);
+registerMemory(program);
+registerMigrate(program);
+registerGraph(program);
+registerRelease(program);
+registerBrain(program);
 
 ;(async () => {
   if (process.argv.length <= 2) {

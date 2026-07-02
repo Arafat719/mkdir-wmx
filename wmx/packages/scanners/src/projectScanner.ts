@@ -1,6 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import fg from 'fast-glob'
+import { scanDependencies } from './dependencyScanner.js'
 
 export interface ProjectIssue {
   type: 'error' | 'warn' | 'info'
@@ -53,31 +54,31 @@ async function checkDeps(cwd: string, issues: ProjectIssue[]): Promise<void> {
     }
   }
 
-  // DEPS_002: package in node_modules not imported anywhere in src/
-  const srcPath = path.join(cwd, 'src')
-  if (await pathExists(srcPath)) {
-    const sourceFiles = await fg(['src/**/*.{ts,tsx,js,jsx}'], { cwd, absolute: true })
-    let allImports = ''
-    for (const file of sourceFiles) {
-      try {
-        allImports += await fs.readFile(file, 'utf8')
-      } catch {
-        // skip unreadable files
-      }
+  // DEPS_002 / DEPS_003: delegate to scanDependencies() for accurate unused/missing detection.
+  // This handles tooling excludes (vite, typescript, etc.), sub-path imports (react-dom/client),
+  // and config files (vite.config.ts, next.config.js, etc.) that live outside src/.
+  try {
+    const report = await scanDependencies(cwd)
+
+    for (const name of report.unused) {
+      issues.push({
+        type: 'warn',
+        code: 'DEPS_002',
+        message: `Package "${name}" is installed but not imported anywhere in the project`,
+        fix: `Remove unused dependency: npm uninstall ${name}`
+      })
     }
 
-    for (const dep of declared) {
-      if (dep.startsWith('@types/')) continue
-      const importPattern = new RegExp(`from ['"]${dep}['"]|require\\(['"]${dep}['"]\\)`, 'm')
-      if (!importPattern.test(allImports)) {
-        issues.push({
-          type: 'warn',
-          code: 'DEPS_002',
-          message: `Package "${dep}" is installed but not imported anywhere in src/`,
-          fix: `Remove unused dependency: npm uninstall ${dep}`
-        })
-      }
+    for (const name of report.missing) {
+      issues.push({
+        type: 'warn',
+        code: 'DEPS_003',
+        message: `Package "${name}" is imported in source but not declared in package.json`,
+        fix: `Install the missing package: npm install ${name}`
+      })
     }
+  } catch {
+    // scanDependencies can fail on malformed package.json — skip gracefully
   }
 }
 
