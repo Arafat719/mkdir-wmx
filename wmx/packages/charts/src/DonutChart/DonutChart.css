@@ -1,0 +1,14 @@
+.wmx-chart {
+  position: relative;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.wmx-chart svg {
+  display: block;
+  max-width: 100%;
+}
+
+.wmx-chart path {
+  transition: opacity 0.1s ease;
+  cursor: pointer;
+}

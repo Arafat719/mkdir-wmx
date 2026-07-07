@@ -18,6 +18,18 @@ const PACKAGES = [
   { name: 'wmx-form',          dir: 'packages/form'       },
   { name: 'wmx-toast',         dir: 'packages/toast'      },
   { name: 'wmx-modal',         dir: 'packages/modal'      },
+  { name: 'wmx-loading',       dir: 'packages/loading'    },
+  { name: 'wmx-grid',          dir: 'packages/grid'       },
+  { name: 'wmx-hooks',         dir: 'packages/hooks'      },
+  { name: 'wmx-utils',         dir: 'packages/utils'      },
+  { name: 'wmx-storage',       dir: 'packages/storage'    },
+  { name: 'wmx-color',         dir: 'packages/color'      },
+  { name: 'wmx-devtools',      dir: 'packages/devtools'   },
+  { name: 'wmx-charts',        dir: 'packages/charts'     },
+  { name: 'wmx-table',         dir: 'packages/table'      },
+  { name: 'wmx-upload',        dir: 'packages/upload'     },
+  { name: 'wmx-auth',          dir: 'packages/auth'       },
+  { name: 'wmx-seo',           dir: 'packages/seo'        },
   { name: 'wmx-os',            dir: 'packages/cli'        },
 ]
 

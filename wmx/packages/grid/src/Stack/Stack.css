@@ -1,0 +1,52 @@
+.wmx-stack {
+  display: flex;
+  gap: 12px;
+}
+
+.wmx-stack--row {
+  flex-direction: row;
+}
+
+.wmx-stack--column {
+  flex-direction: column;
+}
+
+.wmx-stack--wrap {
+  flex-wrap: wrap;
+}
+
+.wmx-stack--align-start {
+  align-items: flex-start;
+}
+
+.wmx-stack--align-center {
+  align-items: center;
+}
+
+.wmx-stack--align-end {
+  align-items: flex-end;
+}
+
+.wmx-stack--align-stretch {
+  align-items: stretch;
+}
+
+.wmx-stack--justify-start {
+  justify-content: flex-start;
+}
+
+.wmx-stack--justify-center {
+  justify-content: center;
+}
+
+.wmx-stack--justify-end {
+  justify-content: flex-end;
+}
+
+.wmx-stack--justify-between {
+  justify-content: space-between;
+}
+
+.wmx-stack--justify-around {
+  justify-content: space-around;
+}

@@ -1,0 +1,34 @@
+.wmx-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.wmx-container--sm {
+  max-width: 640px;
+}
+
+.wmx-container--md {
+  max-width: 768px;
+}
+
+.wmx-container--lg {
+  max-width: 1024px;
+}
+
+.wmx-container--xl {
+  max-width: 1280px;
+}
+
+.wmx-container--full {
+  max-width: none;
+}
+
+@media (min-width: 768px) {
+  .wmx-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

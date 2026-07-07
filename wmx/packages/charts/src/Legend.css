@@ -1,0 +1,24 @@
+.wmx-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 10px 4px 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.wmx-chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wmx-chart-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.wmx-chart-legend-label {
+  font-size: 12px;
+}
