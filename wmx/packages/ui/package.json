@@ -1,0 +1,25 @@
+{
+  "name": "wmx-ui",
+  "version": "0.2.5",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json && node scripts/copy-css.mjs",
+    "dev": "tsc --project tsconfig.json --watch"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.4.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "package.json"
+  ]
+}

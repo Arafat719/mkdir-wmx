@@ -11,6 +11,13 @@ const PACKAGES = [
   { name: 'wmx-os-core',       dir: 'packages/core'       },
   { name: 'wmx-os-scanners',   dir: 'packages/scanners'   },
   { name: 'wmx-os-generators', dir: 'packages/generators' },
+  { name: 'wmx-ui',            dir: 'packages/ui'         },
+  { name: 'wmx-icons',         dir: 'packages/icons'      },
+  { name: 'wmx-motion',        dir: 'packages/motion'     },
+  { name: 'wmx-theme',         dir: 'packages/theme'      },
+  { name: 'wmx-form',          dir: 'packages/form'       },
+  { name: 'wmx-toast',         dir: 'packages/toast'      },
+  { name: 'wmx-modal',         dir: 'packages/modal'      },
   { name: 'wmx-os',            dir: 'packages/cli'        },
 ]
 

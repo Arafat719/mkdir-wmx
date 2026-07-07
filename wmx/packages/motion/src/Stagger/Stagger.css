@@ -1,0 +1,18 @@
+.wmx-stagger__item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wmx-stagger--visible .wmx-stagger__item {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmx-stagger__item {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}

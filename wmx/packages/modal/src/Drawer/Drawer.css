@@ -1,0 +1,142 @@
+.wmx-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+  animation: wmx-drawer-fade 0.15s ease;
+}
+
+.wmx-drawer {
+  position: fixed;
+  background-color: #ffffff;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+.wmx-drawer--left,
+.wmx-drawer--right {
+  top: 0;
+  bottom: 0;
+  width: min(380px, 90vw);
+  animation-duration: 0.22s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.wmx-drawer--left {
+  left: 0;
+  animation-name: wmx-drawer-in-left;
+}
+.wmx-drawer--right {
+  right: 0;
+  animation-name: wmx-drawer-in-right;
+}
+
+.wmx-drawer--top,
+.wmx-drawer--bottom {
+  left: 0;
+  right: 0;
+  height: min(380px, 90vh);
+  animation-duration: 0.22s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.wmx-drawer--top {
+  top: 0;
+  animation-name: wmx-drawer-in-top;
+}
+.wmx-drawer--bottom {
+  bottom: 0;
+  animation-name: wmx-drawer-in-bottom;
+}
+
+.wmx-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.wmx-drawer__title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.wmx-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.wmx-drawer__close:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.wmx-drawer__body {
+  padding: 20px;
+  overflow: auto;
+  flex: 1;
+}
+
+@keyframes wmx-drawer-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes wmx-drawer-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes wmx-drawer-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes wmx-drawer-in-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes wmx-drawer-in-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmx-drawer-overlay,
+  .wmx-drawer {
+    animation: none;
+  }
+}

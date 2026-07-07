@@ -1,0 +1,36 @@
+.wmx-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background-color: #e0e7ff;
+  color: #3730a3;
+  overflow: hidden;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.wmx-avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wmx-avatar--sm {
+  width: 28px;
+  height: 28px;
+  font-size: 11px;
+}
+
+.wmx-avatar--md {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.wmx-avatar--lg {
+  width: 56px;
+  height: 56px;
+  font-size: 18px;
+}

@@ -1,0 +1,36 @@
+.wmx-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.wmx-badge--default {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.wmx-badge--primary {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.wmx-badge--success {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.wmx-badge--warning {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.wmx-badge--danger {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}

@@ -1,0 +1,45 @@
+.wmx-transition {
+  transition-property: opacity, transform;
+  transition-duration: var(--wmx-transition-duration, 200ms);
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wmx-transition--fade {
+  opacity: 0;
+}
+.wmx-transition--fade.wmx-transition--entered {
+  opacity: 1;
+}
+
+.wmx-transition--scale {
+  opacity: 0;
+  transform: scale(0.95);
+}
+.wmx-transition--scale.wmx-transition--entered {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.wmx-transition--slide-up {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.wmx-transition--slide-up.wmx-transition--entered {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wmx-transition--slide-down {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+.wmx-transition--slide-down.wmx-transition--entered {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmx-transition {
+    transition: none;
+  }
+}

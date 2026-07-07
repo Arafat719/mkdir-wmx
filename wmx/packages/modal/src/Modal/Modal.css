@@ -1,0 +1,117 @@
+.wmx-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+  animation: wmx-dialog-fade 0.15s ease;
+}
+
+.wmx-dialog {
+  background-color: #ffffff;
+  border-radius: 14px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
+  animation: wmx-dialog-scale 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.wmx-dialog--sm {
+  max-width: 360px;
+}
+
+.wmx-dialog--md {
+  max-width: 480px;
+}
+
+.wmx-dialog--lg {
+  max-width: 640px;
+}
+
+.wmx-dialog--xl {
+  max-width: 880px;
+}
+
+.wmx-dialog--full {
+  max-width: none;
+  width: calc(100vw - 48px);
+  height: calc(100vh - 48px);
+}
+
+.wmx-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.wmx-dialog__title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.wmx-dialog__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.wmx-dialog__close:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.wmx-dialog__close:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.wmx-dialog__body {
+  padding: 20px;
+}
+
+@keyframes wmx-dialog-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes wmx-dialog-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmx-dialog-overlay,
+  .wmx-dialog {
+    animation: none;
+  }
+}

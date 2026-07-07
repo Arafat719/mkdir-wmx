@@ -1,0 +1,72 @@
+.wmx-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.wmx-tooltip__bubble {
+  position: absolute;
+  z-index: 1000;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: #111827;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.wmx-tooltip:hover .wmx-tooltip__bubble,
+.wmx-tooltip:focus-within .wmx-tooltip__bubble {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wmx-tooltip__bubble--top {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, 2px);
+}
+.wmx-tooltip:hover .wmx-tooltip__bubble--top,
+.wmx-tooltip:focus-within .wmx-tooltip__bubble--top {
+  transform: translate(-50%, 0);
+}
+
+.wmx-tooltip__bubble--bottom {
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, -2px);
+}
+.wmx-tooltip:hover .wmx-tooltip__bubble--bottom,
+.wmx-tooltip:focus-within .wmx-tooltip__bubble--bottom {
+  transform: translate(-50%, 0);
+}
+
+.wmx-tooltip__bubble--left {
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translate(2px, -50%);
+}
+.wmx-tooltip:hover .wmx-tooltip__bubble--left,
+.wmx-tooltip:focus-within .wmx-tooltip__bubble--left {
+  transform: translate(0, -50%);
+}
+
+.wmx-tooltip__bubble--right {
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translate(-2px, -50%);
+}
+.wmx-tooltip:hover .wmx-tooltip__bubble--right,
+.wmx-tooltip:focus-within .wmx-tooltip__bubble--right {
+  transform: translate(0, -50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmx-tooltip__bubble {
+    transition: none;
+  }
+}

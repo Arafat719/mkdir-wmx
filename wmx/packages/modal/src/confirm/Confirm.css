@@ -1,0 +1,104 @@
+.wmx-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  padding: 24px;
+  animation: wmx-confirm-fade 0.15s ease;
+}
+
+.wmx-confirm {
+  background-color: #ffffff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 400px;
+  padding: 22px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
+  animation: wmx-confirm-scale 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wmx-confirm__title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.wmx-confirm__description {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.wmx-confirm__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.wmx-confirm__btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wmx-confirm__btn--cancel {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  border-color: #e5e7eb;
+}
+.wmx-confirm__btn--cancel:hover {
+  background-color: #e5e7eb;
+}
+
+.wmx-confirm__btn--confirm {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+.wmx-confirm__btn--confirm:hover {
+  background-color: #1d4ed8;
+}
+
+.wmx-confirm__btn--danger {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+.wmx-confirm__btn--danger:hover {
+  background-color: #b91c1c;
+}
+
+@keyframes wmx-confirm-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes wmx-confirm-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmx-confirm-overlay,
+  .wmx-confirm {
+    animation: none;
+  }
+}

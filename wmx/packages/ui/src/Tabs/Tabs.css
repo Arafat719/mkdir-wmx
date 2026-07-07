@@ -1,0 +1,65 @@
+.wmx-tabs__list {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.wmx-tabs__tab {
+  position: relative;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.wmx-tabs__tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: transparent;
+  border-radius: 1px;
+  transition: background-color 0.15s ease;
+}
+
+.wmx-tabs__tab:hover {
+  color: #111827;
+}
+
+.wmx-tabs__tab--active {
+  color: #2563eb;
+}
+
+.wmx-tabs__tab--active::after {
+  background-color: #2563eb;
+}
+
+.wmx-tabs__tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.wmx-tabs__tab:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.wmx-tabs__panel {
+  padding: 20px 4px;
+  color: #374151;
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmx-tabs__tab,
+  .wmx-tabs__tab::after {
+    transition: none;
+  }
+}

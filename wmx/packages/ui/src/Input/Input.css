@@ -1,0 +1,60 @@
+.wmx-input {
+  display: block;
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #111827;
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wmx-input::placeholder {
+  color: #9ca3af;
+}
+
+.wmx-input:hover {
+  border-color: #9ca3af;
+}
+
+.wmx-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.wmx-input:disabled {
+  cursor: not-allowed;
+  background-color: #f3f4f6;
+  color: #9ca3af;
+}
+
+.wmx-input--sm {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.wmx-input--md {
+  padding: 9px 12px;
+  font-size: 14px;
+}
+
+.wmx-input--lg {
+  padding: 12px 16px;
+  font-size: 16px;
+}
+
+.wmx-input--error {
+  border-color: #dc2626;
+}
+
+.wmx-input--error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmx-input {
+    transition: none;
+  }
+}
