@@ -1,24 +1,26 @@
 import fse from 'fs-extra'
 import path from 'path'
 
-interface WmxConfig {
+interface DeployConfig {
   projectName?: string
   framework?: string
-  packageManager?: string
-  frontend?: { framework?: string; dir?: string }
-  backend?: { framework?: string; dir?: string }
-  database?: string
+  backend?: string
 }
 
 const BACKEND_FRAMEWORKS = ['express', 'nestjs', 'fastify', 'koa']
 
-function hasBackend(config: WmxConfig): boolean {
-  return !!(config.backend && BACKEND_FRAMEWORKS.includes(config.backend.framework ?? ''))
+function hasBackend(config: DeployConfig): boolean {
+  return BACKEND_FRAMEWORKS.includes((config.backend ?? '').toLowerCase())
 }
 
-export function generateVercelConfig(config: WmxConfig): object {
-  const frontendDir = config.frontend?.dir ?? 'frontend'
-  const backendDir  = config.backend?.dir  ?? 'backend'
+function getDirs(config: DeployConfig): { frontendDir: string; backendDir: string } {
+  return hasBackend(config)
+    ? { frontendDir: 'frontend', backendDir: 'backend' }
+    : { frontendDir: '.', backendDir: 'backend' }
+}
+
+export function generateVercelConfig(config: DeployConfig): object {
+  const { frontendDir, backendDir } = getDirs(config)
 
   if (hasBackend(config)) {
     return {
@@ -50,12 +52,13 @@ export function generateVercelConfig(config: WmxConfig): object {
   }
 }
 
-export function generateRenderConfig(config: WmxConfig): string {
-  const frontendDir = config.frontend?.dir ?? 'frontend'
-  const backendDir  = config.backend?.dir  ?? 'backend'
-  const projectName = config.projectName   ?? 'my-app'
+export function generateRenderConfig(config: DeployConfig, cwd: string = process.cwd()): string {
+  const { frontendDir, backendDir } = getDirs(config)
+  const projectName = config.projectName ?? 'my-app'
 
-  const envExamplePath = path.join(process.cwd(), '.env.example')
+  const envExamplePath = hasBackend(config)
+    ? path.join(cwd, backendDir, '.env.example')
+    : path.join(cwd, '.env.example')
   let envKeys: string[] = []
   if (fse.pathExistsSync(envExamplePath)) {
     const content = fse.readFileSync(envExamplePath, 'utf-8')
@@ -96,17 +99,17 @@ export function generateRenderConfig(config: WmxConfig): string {
 `
 }
 
-export function generateNetlifyConfig(config: WmxConfig): string {
-  const frontendDir = config.frontend?.dir ?? 'frontend'
-  const framework   = config.frontend?.framework ?? ''
+export function generateNetlifyConfig(config: DeployConfig): string {
+  const { frontendDir } = getDirs(config)
+  const framework = (config.framework ?? '').toLowerCase()
 
   let buildCommand: string
   let publish: string
 
-  if (framework === 'next') {
+  if (framework.includes('next')) {
     buildCommand = 'npm run build'
     publish = '.next'
-  } else if (framework === 'nuxt') {
+  } else if (framework.includes('nuxt')) {
     buildCommand = 'npm run generate'
     publish = 'dist'
   } else {

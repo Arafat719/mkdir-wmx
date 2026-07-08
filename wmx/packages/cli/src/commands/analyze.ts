@@ -20,8 +20,13 @@ function truncateTree(tree: string, maxDepth: number): string {
   return tree
     .split('\n')
     .filter(line => {
-      const indent = line.length - line.trimStart().length
-      const depth  = Math.floor(indent / 4)
+      // Tree lines are indented in 4-char blocks ('    ' or '│   ') followed by a
+      // connector ('├── ' or '└── '). trimStart() only strips whitespace, so it
+      // undercounts depth once a '│' guide character appears in the prefix — find
+      // the connector itself instead of relying on leading whitespace width.
+      const connectorIndex = line.search(/[├└]/)
+      if (connectorIndex === -1) return true // root line, always keep
+      const depth = connectorIndex / 4 + 1
       return depth <= maxDepth
     })
     .join('\n')

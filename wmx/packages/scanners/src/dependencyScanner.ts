@@ -109,8 +109,12 @@ export async function scanDependencies(cwd: string): Promise<DependencyReport> {
 
   // Step 2 — Scan source files + root config files for imports
   const files = await fg(
-    ['src/**/*.{ts,tsx,js,jsx,mjs,cjs}', '*.config.{js,ts,mjs,cjs}'],
-    { cwd, absolute: true }
+    ['**/*.{ts,tsx,js,jsx,mjs,cjs}'],
+    {
+      cwd,
+      absolute: true,
+      ignore: ['**/node_modules/**', '**/dist/**', '**/build/**', '**/.next/**', '**/coverage/**'],
+    }
   )
 
   const importedPackages = new Set<string>()
@@ -142,7 +146,7 @@ export async function scanDependencies(cwd: string): Promise<DependencyReport> {
 
   // Step 5 — Missing dependencies
   const missing = Array.from(importedPackages).filter(
-    name => !(name in deps) && !NODE_BUILTINS.has(name)
+    name => !(name in deps) && !NODE_BUILTINS.has(name.replace(/^node:/, ''))
   )
 
   // Step 6 — Heavy dependencies

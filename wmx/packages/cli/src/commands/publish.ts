@@ -30,6 +30,12 @@ function bumpVersion(current: string, type: 'patch' | 'minor' | 'major'): string
   return `${major}.${minor}.${patch}`
 }
 
+function detectPackageManager(cwd: string): string {
+  if (fs.pathExistsSync(path.join(cwd, 'pnpm-lock.yaml')))   return 'pnpm'
+  if (fs.pathExistsSync(path.join(cwd, 'yarn.lock')))         return 'yarn'
+  return 'npm'
+}
+
 async function getGitLogSinceLastTag(cwd: string): Promise<string[]> {
   const describeResult = await execa('git', ['describe', '--tags', '--abbrev=0'], { cwd, reject: false })
   let logResult
@@ -178,7 +184,8 @@ export function register(program: Command): void {
       // Step 9 — Build (unless --skip-build)
       if (!opts.skipBuild) {
         const buildSpinner = ora('Running build...').start()
-        const result = await execa('pnpm', ['run', 'build'], { cwd, reject: false })
+        const packageManager = detectPackageManager(cwd)
+        const result = await execa(packageManager, ['run', 'build'], { cwd, reject: false })
         if (result.exitCode !== 0) {
           buildSpinner.fail('Build failed.')
           console.log(chalk.red(result.stderr || result.stdout))

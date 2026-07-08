@@ -7,6 +7,7 @@ export interface RouteEntry {
   path: string
   file: string
   line: number
+  source: 'file' | 'handler'
 }
 
 export interface ImportEntry {
@@ -97,15 +98,16 @@ async function scanRoutes(cwd: string): Promise<RouteEntry[]> {
     const relFile = path.relative(cwd, file)
     const normalised = relFile.replace(/\\/g, '/')
 
-    if (normalised.includes('app/') || normalised.includes('pages/')) {
-      const isRouteFile = /\/(page|route|layout)\.(tsx?|jsx?)$/.test(normalised)
-      if (isRouteFile) {
-        const routePath = normalised
-          .replace(/^.*?(?:app|pages)\//, '/')
+    const isRouteFile = /\/(page|route|layout)\.(tsx?|jsx?)$/.test(normalised)
+    if (isRouteFile) {
+      const segments = normalised.split('/')
+      const rootIndex = segments.findIndex(seg => seg === 'app' || seg === 'pages')
+      if (rootIndex !== -1) {
+        const routePath = ('/' + segments.slice(rootIndex + 1).join('/'))
           .replace(/\/(page|route|layout)\.(tsx?|jsx?)$/, '')
           .replace(/\/index$/, '')
           || '/'
-        routes.push({ method: 'GET', path: routePath, file: relFile, line: 1 })
+        routes.push({ method: 'GET', path: routePath, file: relFile, line: 1, source: 'file' })
       }
     }
 
@@ -126,7 +128,8 @@ async function scanRoutes(cwd: string): Promise<RouteEntry[]> {
           method: match[2].toUpperCase(),
           path:   match[3],
           file:   relFile,
-          line:   i + 1
+          line:   i + 1,
+          source: 'handler'
         })
       }
     }

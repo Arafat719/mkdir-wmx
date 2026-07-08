@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { DragEvent, KeyboardEvent, ReactNode } from "react";
 import { formatBytes } from "../formatBytes.js";
 import "./FileUpload.css";
@@ -59,6 +59,18 @@ export function FileUpload({
   const [rejections, setRejections] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const filesRef = useRef(files);
+  filesRef.current = files;
+
+  // Revoke any outstanding object URLs when the component unmounts, so preview
+  // blobs don't leak once the caller stops rendering the upload widget.
+  useEffect(() => {
+    return () => {
+      filesRef.current.forEach((f) => {
+        if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+      });
+    };
+  }, []);
 
   const runUpload = (entry: UploadFile) => {
     if (!onUpload) return;
@@ -107,6 +119,12 @@ export function FileUpload({
 
     setFiles((prev) => {
       const next = multiple ? [...prev, ...entries] : entries;
+      if (!multiple) {
+        // Replacing the single-file selection — release the previous preview blob.
+        prev.forEach((f) => {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+        });
+      }
       onFilesChange?.(next);
       return next;
     });

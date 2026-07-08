@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { createRoot } from "react-dom/client";
 import "./Confirm.css";
@@ -22,6 +23,14 @@ function ConfirmDialog({
   variant = "default",
   onResolve,
 }: ConfirmDialogProps) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onResolve(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onResolve]);
+
   return createPortal(
     <div className="wmx-confirm-overlay" onClick={() => onResolve(false)}>
       <div
@@ -61,8 +70,12 @@ export function confirm(options: ConfirmOptions = {}): Promise<boolean> {
     const root = createRoot(container);
 
     const handleResolve = (result: boolean) => {
-      root.unmount();
-      container.remove();
+      // Defer unmount so we don't synchronously tear down the root while React
+      // is still dispatching the click/keydown event that triggered it.
+      setTimeout(() => {
+        root.unmount();
+        container.remove();
+      }, 0);
       resolve(result);
     };
 

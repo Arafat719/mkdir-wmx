@@ -55,7 +55,7 @@ export class ScaffoldGenerator {
 
     console.log(`\nRunning ${answers.packageManager} install...`)
     try {
-      if (templateName === 'react-express-mongo') {
+      if (templateName === 'react-express-mongo' || templateName === 'react-express-mongo-js') {
         await execa(answers.packageManager, ['install'], {
           cwd: path.join(targetPath, 'frontend'),
           stdio: 'inherit'
@@ -88,7 +88,9 @@ export class ScaffoldGenerator {
     if (fw.includes('react') && be.includes('express') && db.includes('mongo')) {
       return isJs ? 'react-express-mongo-js' : 'react-express-mongo'
     }
-    return isJs ? 'react-express-mongo-js' : 'react-express-mongo'
+    throw new Error(
+      `No template available for framework="${answers.framework}", backend="${answers.backend}", database="${answers.database}". Supported combos: Next.js + PostgreSQL, or React + Express + MongoDB.`
+    )
   }
 
   private static async replaceInAllFiles(dir: string, search: string, replacement: string): Promise<void> {

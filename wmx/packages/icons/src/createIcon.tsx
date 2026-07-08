@@ -8,7 +8,7 @@ export interface IconProps extends Omit<SVGAttributes<SVGSVGElement>, "strokeWid
 
 export function createIcon(displayName: string, children: ReactNode) {
   const Icon = forwardRef<SVGSVGElement, IconProps>(
-    ({ size = 20, strokeWidth = 1.75, ...rest }, ref) => (
+    ({ size = 24, strokeWidth = 1.75, ...rest }, ref) => (
       <svg
         ref={ref}
         xmlns="http://www.w3.org/2000/svg"

@@ -81,10 +81,11 @@ async function runWizard(cwd: string): Promise<void> {
   ])
 
   const config: WmxConfig = {
-    framework: answers.framework as string,
-    backend:   answers.backend   as string,
-    database:  answers.database  as string,
-    deploy:    { provider: answers.deploy as string },
+    framework:      answers.framework      as string,
+    backend:        answers.backend        as string,
+    database:       answers.database       as string,
+    packageManager: answers.packageManager as string,
+    deploy:         { provider: answers.deploy as string },
   }
 
   saveConfig(config, cwd)
@@ -122,7 +123,7 @@ function runShow(cwd: string): void {
   console.log(row('Framework',   config.framework        ?? 'N/A'))
   console.log(row('Backend',     config.backend          ?? 'N/A'))
   console.log(row('Database',    config.database         ?? 'N/A'))
-  console.log(row('Pkg Manager', detectPackageManager(cwd)))
+  console.log(row('Pkg Manager', config.packageManager ?? detectPackageManager(cwd)))
   console.log(row('Deploy',      config.deploy?.provider ?? 'N/A'))
   console.log()
 }

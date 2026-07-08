@@ -30,10 +30,7 @@ function methodColor(method: string): (s: string) => string {
 const METHOD_W = 8
 
 function isNextJsPageRoute(route: RouteEntry): boolean {
-  const isGet = route.method.toUpperCase() === 'GET'
-  const inPagesDir = route.file.includes('app/') || route.file.includes('pages/')
-  const isApiPath = route.path.startsWith('/api')
-  return isGet && inPagesDir && !isApiPath
+  return route.source === 'file' && !route.path.startsWith('/api')
 }
 
 function groupByFile(routes: RouteEntry[]): Map<string, RouteEntry[]> {

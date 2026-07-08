@@ -24,7 +24,7 @@ importers:
   packages/charts:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':
@@ -114,7 +114,7 @@ importers:
   packages/form:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':
@@ -152,7 +152,7 @@ importers:
   packages/grid:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':
@@ -165,7 +165,7 @@ importers:
   packages/hooks:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':
@@ -178,7 +178,7 @@ importers:
   packages/icons:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':
@@ -191,7 +191,7 @@ importers:
   packages/loading:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':
@@ -204,10 +204,10 @@ importers:
   packages/modal:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
       react-dom:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@types/react':
@@ -223,7 +223,7 @@ importers:
   packages/motion:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':
@@ -276,7 +276,7 @@ importers:
   packages/table:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':
@@ -289,7 +289,7 @@ importers:
   packages/theme:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':
@@ -302,7 +302,7 @@ importers:
   packages/toast:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':
@@ -315,10 +315,10 @@ importers:
   packages/ui:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
       react-dom:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@types/react':
@@ -334,7 +334,7 @@ importers:
   packages/upload:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8.0'
         version: 18.3.1
     devDependencies:
       '@types/react':

@@ -12,9 +12,9 @@ export interface LegendProps {
   theme?: ChartTheme;
 }
 
-/** Identity must never rely on color alone — shown for every chart with 2+ series, omitted for 1. */
+/** Always present — every chart renders its legend regardless of series count. */
 export function ChartLegend({ items, theme = "light" }: LegendProps) {
-  if (items.length < 2) return null;
+  if (items.length === 0) return null;
   const chrome = getChrome(theme);
 
   return (

@@ -2,7 +2,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import fg from 'fast-glob'
 import { analyzeProject } from './astScanner.js'
-import type { ExportEntry } from './astScanner.js'
+import type { ExportEntry, ImportEntry } from './astScanner.js'
 
 export interface CleanEntry {
   file: string
@@ -26,19 +26,25 @@ const FONT_EXTS = new Set(['.ttf', '.woff', '.woff2', '.eot', '.otf'])
 const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.bmp'])
 const SKIP_EXPORT_NAMES = new Set(['default', '_'])
 
-function isFileImported(exportFile: string, importTos: string[]): boolean {
+function resolveRelativeImport(fromFile: string, to: string): string | null {
+  if (!to.startsWith('.')) return null
+  const fromDir = path.posix.dirname(fromFile.replace(/\\/g, '/'))
+  return path.posix.normalize(path.posix.join(fromDir, to))
+}
+
+function isFileImported(exportFile: string, imports: ImportEntry[]): boolean {
   const normalised = exportFile.replace(/\\/g, '/').replace(/\.(ts|tsx|js|jsx)$/, '')
-  const basename = path.basename(normalised)
-  return importTos.some(to => {
-    const normTo = to.replace(/\\/g, '/')
-    return normTo === normalised || normTo.endsWith('/' + basename) || normTo === basename
+  const normalisedNoIndex = normalised.replace(/\/index$/, '')
+  return imports.some(({ from, to }) => {
+    const resolved = resolveRelativeImport(from, to)
+    if (!resolved) return false
+    return resolved === normalised || resolved === normalisedNoIndex
   })
 }
 
-function isAssetReferenced(assetFile: string, importTos: string[]): boolean {
-  const basename = path.basename(assetFile)
+function isAssetReferenced(assetFile: string, imports: ImportEntry[]): boolean {
   const normalised = assetFile.replace(/\\/g, '/')
-  return importTos.some(to => to.includes(basename) || to.endsWith(normalised))
+  return imports.some(({ from, to }) => resolveRelativeImport(from, to) === normalised)
 }
 
 export function classifyExport(exp: ExportEntry): 'component' | 'hook' | null {
@@ -83,14 +89,14 @@ export async function scanClean(cwd: string): Promise<CleanReport> {
     walkFiles(cwd),
   ])
 
-  const importTos = analysis.imports.map(i => i.to)
+  const imports = analysis.imports
 
   const components: CleanEntry[] = []
   const hooks: CleanEntry[] = []
   for (const exp of analysis.exports) {
     const kind = classifyExport(exp)
     if (!kind) continue
-    if (isFileImported(exp.file, importTos)) continue
+    if (isFileImported(exp.file, imports)) continue
     const entry = { file: exp.file, name: exp.name }
     if (kind === 'component') components.push(entry)
     else hooks.push(entry)
@@ -107,19 +113,19 @@ export async function scanClean(cwd: string): Promise<CleanReport> {
     const normalised = relFile.replace(/\\/g, '/')
 
     if (CSS_EXTS.has(ext)) {
-      if (!isAssetReferenced(relFile, importTos)) css.push({ file: relFile })
+      if (!isAssetReferenced(relFile, imports)) css.push({ file: relFile })
       continue
     }
     if (FONT_EXTS.has(ext)) {
-      if (!isAssetReferenced(relFile, importTos)) fonts.push({ file: relFile })
+      if (!isAssetReferenced(relFile, imports)) fonts.push({ file: relFile })
       continue
     }
     if (ext === '.svg' && (base.includes('icon') || normalised.includes('/icons/'))) {
-      if (!isAssetReferenced(relFile, importTos)) icons.push({ file: relFile })
+      if (!isAssetReferenced(relFile, imports)) icons.push({ file: relFile })
       continue
     }
     if (IMAGE_EXTS.has(ext)) {
-      if (!isAssetReferenced(relFile, importTos)) images.push({ file: relFile })
+      if (!isAssetReferenced(relFile, imports)) images.push({ file: relFile })
       continue
     }
   }

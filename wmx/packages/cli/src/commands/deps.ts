@@ -51,7 +51,15 @@ export function register(program: Command): void {
 
       const cwd     = process.cwd()
       const spinner = ora('Scanning dependencies...').start()
-      const report  = await scanDependencies(cwd)
+
+      let report: DependencyReport
+      try {
+        report = await scanDependencies(cwd)
+      } catch (err) {
+        spinner.fail('Dependency scan failed')
+        console.error(err)
+        process.exit(1)
+      }
       spinner.stop()
 
       if (opts.json) {

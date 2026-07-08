@@ -3,7 +3,16 @@ import chalk from 'chalk'
 import ora from 'ora'
 import { execa } from 'execa'
 import inquirer from 'inquirer'
+import { existsSync } from 'fs'
+import { join } from 'path'
 import { scanDependencies } from 'wmx-os-scanners'
+
+function detectPackageManager(cwd: string): string {
+  if (existsSync(join(cwd, 'pnpm-lock.yaml')))   return 'pnpm'
+  if (existsSync(join(cwd, 'yarn.lock')))         return 'yarn'
+  if (existsSync(join(cwd, 'package-lock.json'))) return 'npm'
+  return 'npm'
+}
 
 export function register(program: Command): void {
   program
@@ -11,9 +20,19 @@ export function register(program: Command): void {
     .description('Interactively upgrade outdated dependencies')
     .option('--dry-run', 'Preview upgrade without making changes')
     .action(async (opts: { dryRun?: boolean }) => {
+      const cwd = process.cwd()
+      const packageManager = detectPackageManager(cwd)
+
       // Step a — Scan
       const spinner = ora('Checking for outdated packages...').start()
-      const report  = await scanDependencies(process.cwd())
+      let report: Awaited<ReturnType<typeof scanDependencies>>
+      try {
+        report = await scanDependencies(cwd)
+      } catch (err) {
+        spinner.fail('Dependency scan failed')
+        console.error(err)
+        process.exit(1)
+      }
       spinner.stop()
 
       // Step b — Nothing outdated
@@ -44,7 +63,8 @@ export function register(program: Command): void {
 
       // Step e — Preview install command
       const installArgs = selected.map(name => `${name}@latest`)
-      console.log(chalk.cyan('Will run: ') + chalk.white(`npm install ${installArgs.join(' ')}`))
+      const installSubcommand = packageManager === 'yarn' ? 'add' : 'install'
+      console.log(chalk.cyan('Will run: ') + chalk.white(`${packageManager} ${installSubcommand} ${installArgs.join(' ')}`))
 
       // Step f — Dry run exit
       if (opts.dryRun) {
@@ -70,7 +90,7 @@ export function register(program: Command): void {
       // Step h — Run install
       const installSpinner = ora('Installing upgrades...').start()
       try {
-        await execa('npm', ['install', ...installArgs], { cwd: process.cwd(), stdio: 'pipe' })
+        await execa(packageManager, [installSubcommand, ...installArgs], { cwd, stdio: 'pipe' })
         installSpinner.succeed()
         console.log(chalk.green('✔ Upgrade complete.'))
       } catch (error) {

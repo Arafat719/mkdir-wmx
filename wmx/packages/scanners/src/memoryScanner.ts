@@ -168,7 +168,7 @@ export async function scanMemory(cwd: string): Promise<ProjectMemory> {
     else if (kind === 'hook') hooks.push({ name: exp.name, file: exp.file })
   }
 
-  const apiRoutes = analysis.routes.filter(r => r.line > 1 || /\/api\//.test(r.file))
+  const apiRoutes = analysis.routes.filter(r => r.source === 'handler' || /\/api\//.test(r.file))
   const pageRoutes = analysis.routes.filter(r => !apiRoutes.includes(r))
 
   return {

@@ -1,10 +1,12 @@
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { join, resolve } from "path";
+import { logger } from "./logger.js";
 
 export interface WmxConfig {
   framework?: string;
   backend?: string;
   database?: string;
+  packageManager?: string;
   ignore?: string[];
   plugins?: string[];
   deploy?: {
@@ -24,7 +26,8 @@ export function loadConfig(cwd: string): WmxConfig | null {
       try {
         const raw = readFileSync(candidate, "utf-8");
         return JSON.parse(raw) as WmxConfig;
-      } catch {
+      } catch (err) {
+        logger.warn(`Failed to parse ${candidate}: ${err instanceof Error ? err.message : String(err)}`);
         return null;
       }
     }

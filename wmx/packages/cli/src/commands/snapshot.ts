@@ -5,7 +5,14 @@ import ora from 'ora'
 import fse from 'fs-extra'
 import { execa } from 'execa'
 import inquirer from 'inquirer'
+import { existsSync } from 'fs'
 import { scanStats } from 'wmx-os-scanners'
+
+function detectPackageManager(cwd: string): string {
+  if (existsSync(path.join(cwd, 'pnpm-lock.yaml')))   return 'pnpm'
+  if (existsSync(path.join(cwd, 'yarn.lock')))         return 'yarn'
+  return 'npm'
+}
 
 interface Snapshot {
   name: string
@@ -185,7 +192,7 @@ export function register(program: Command): void {
         {
           type: 'confirm',
           name: 'proceed',
-          message: 'This will overwrite package.json dependencies and run npm install. Proceed?',
+          message: `This will overwrite package.json dependencies and run ${detectPackageManager(process.cwd())} install. Proceed?`,
           default: false,
         },
       ])
@@ -201,9 +208,11 @@ export function register(program: Command): void {
       pkg.devDependencies = snap.devDependencies
       await fse.writeJson(pkgPath, pkg, { spaces: 2 })
 
+      const cwd = process.cwd()
+      const packageManager = detectPackageManager(cwd)
       const spinner = ora('Reinstalling dependencies...').start()
       try {
-        await execa('npm', ['install'], { cwd: process.cwd(), stdio: 'pipe' })
+        await execa(packageManager, ['install'], { cwd, stdio: 'pipe' })
         spinner.succeed()
         console.log(chalk.green('✔  Restore complete.'))
       } catch (error) {

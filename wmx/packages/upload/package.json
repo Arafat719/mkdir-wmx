@@ -9,7 +9,7 @@
     "dev": "tsc --project tsconfig.json --watch"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": ">=16.8.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
