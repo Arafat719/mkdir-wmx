@@ -1,0 +1,53 @@
+.wmx-card {
+  background-color: var(--wmx-color-surface);
+  border: 1px solid var(--wmx-color-border);
+  border-radius: var(--wmx-radius-lg);
+  box-shadow: var(--wmx-shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--wmx-transition-base), transform var(--wmx-transition-base);
+}
+
+.wmx-card-interactive:hover {
+  box-shadow: var(--wmx-shadow-md);
+  transform: translateY(-2px);
+}
+
+.wmx-card-header,
+.wmx-card-body,
+.wmx-card-footer {
+  padding: var(--wmx-space-5);
+}
+
+.wmx-card-header {
+  border-bottom: 1px solid var(--wmx-color-border);
+  font-weight: 600;
+}
+
+.wmx-card-footer {
+  border-top: 1px solid var(--wmx-color-border);
+  background-color: var(--wmx-color-surface-alt);
+}
+
+// Variant: image + body/footer side by side instead of stacked. Put an
+// <img class="wmx-card-img"> as the first child.
+.wmx-card-horizontal {
+  display: flex;
+
+  .wmx-card-img {
+    width: 40%;
+    flex-shrink: 0;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .wmx-card-body {
+    flex: 1;
+  }
+}
+
+// Variant: highlighted/selected card — e.g. the recommended tier in a pricing
+// row. Pairs well with a .wmx-badge for a "Popular" flag.
+.wmx-card-featured {
+  border-color: var(--wmx-color-primary);
+  box-shadow: 0 0 0 1px var(--wmx-color-primary), var(--wmx-shadow-md);
+}

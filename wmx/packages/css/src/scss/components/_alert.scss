@@ -1,0 +1,31 @@
+.wmx-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--wmx-space-3);
+  padding: var(--wmx-space-4);
+  border-radius: var(--wmx-radius-md);
+  border: 1px solid transparent;
+  font-size: var(--wmx-font-size-sm);
+}
+
+.wmx-alert-body { flex: 1; }
+
+.wmx-alert-close {
+  flex-shrink: 0;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity var(--wmx-transition-fast);
+
+  &:hover { opacity: 1; }
+}
+
+@mixin alert-variant($color-var, $subtle-mix: 12%) {
+  background-color: color-mix(in srgb, var($color-var) #{$subtle-mix}, var(--wmx-color-surface));
+  border-color: color-mix(in srgb, var($color-var) 35%, transparent);
+  color: color-mix(in srgb, var($color-var) 65%, var(--wmx-color-text));
+}
+
+.wmx-alert-info { @include alert-variant(--wmx-color-info); }
+.wmx-alert-success { @include alert-variant(--wmx-color-success); }
+.wmx-alert-warning { @include alert-variant(--wmx-color-warning); }
+.wmx-alert-danger { @include alert-variant(--wmx-color-danger); }

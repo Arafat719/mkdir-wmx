@@ -1,0 +1,18 @@
+.wmx-flex { display: flex; }
+.wmx-inline-flex { display: inline-flex; }
+.wmx-flex-col { flex-direction: column; }
+.wmx-flex-row { flex-direction: row; }
+.wmx-flex-wrap { flex-wrap: wrap; }
+.wmx-items-center { align-items: center; }
+.wmx-items-start { align-items: flex-start; }
+.wmx-items-end { align-items: flex-end; }
+.wmx-justify-center { justify-content: center; }
+.wmx-justify-between { justify-content: space-between; }
+.wmx-justify-end { justify-content: flex-end; }
+.wmx-justify-start { justify-content: flex-start; }
+.wmx-gap-1 { gap: var(--wmx-space-1); }
+.wmx-gap-2 { gap: var(--wmx-space-2); }
+.wmx-gap-3 { gap: var(--wmx-space-3); }
+.wmx-gap-4 { gap: var(--wmx-space-4); }
+.wmx-gap-5 { gap: var(--wmx-space-5); }
+.wmx-flex-1 { flex: 1 1 0%; }

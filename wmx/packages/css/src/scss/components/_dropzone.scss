@@ -1,0 +1,99 @@
+@use "../abstracts/mixins";
+
+.wmx-dropzone {
+  display: block;
+}
+
+.wmx-dropzone-input {
+  @include mixins.visually-hidden;
+}
+
+.wmx-dropzone-input:focus-visible + .wmx-dropzone-area {
+  outline: 2px solid var(--wmx-color-ring);
+  outline-offset: 2px;
+}
+
+.wmx-dropzone-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wmx-space-1);
+  padding: var(--wmx-space-6) var(--wmx-space-4);
+  border: 2px dashed var(--wmx-color-border);
+  border-radius: var(--wmx-radius-lg);
+  background-color: var(--wmx-color-surface-alt);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--wmx-transition-fast), background-color var(--wmx-transition-fast);
+
+  &:hover {
+    border-color: var(--wmx-color-primary);
+  }
+
+  &.wmx-dropzone-active {
+    border-color: var(--wmx-color-primary);
+    background-color: var(--wmx-color-primary-subtle);
+  }
+}
+
+.wmx-dropzone-icon {
+  font-size: var(--wmx-font-size-2xl);
+  color: var(--wmx-color-text-muted);
+}
+
+.wmx-dropzone-text {
+  font-size: var(--wmx-font-size-sm);
+  color: var(--wmx-color-text);
+}
+
+.wmx-dropzone-hint {
+  font-size: var(--wmx-font-size-xs);
+  color: var(--wmx-color-text-muted);
+}
+
+.wmx-dropzone-list {
+  list-style: none;
+  margin: var(--wmx-space-3) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wmx-space-2);
+}
+
+.wmx-dropzone-file {
+  display: flex;
+  align-items: center;
+  gap: var(--wmx-space-3);
+  padding: var(--wmx-space-2) var(--wmx-space-3);
+  background-color: var(--wmx-color-surface);
+  border: 1px solid var(--wmx-color-border);
+  border-radius: var(--wmx-radius-md);
+  font-size: var(--wmx-font-size-sm);
+}
+
+.wmx-dropzone-file-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wmx-dropzone-file-size {
+  color: var(--wmx-color-text-muted);
+  font-size: var(--wmx-font-size-xs);
+}
+
+.wmx-dropzone-file-remove {
+  @include mixins.focus-ring;
+  flex-shrink: 0;
+  padding: var(--wmx-space-1);
+  border-radius: var(--wmx-radius-sm);
+  color: var(--wmx-color-text-muted);
+  transition: background-color var(--wmx-transition-fast), color var(--wmx-transition-fast);
+
+  &:hover {
+    color: var(--wmx-color-danger);
+    background-color: var(--wmx-color-surface-alt);
+  }
+}

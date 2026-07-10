@@ -12,3 +12,6 @@ export { DonutChart } from "./DonutChart/DonutChart.js";
 
 export type { SparklineProps } from "./Sparkline/Sparkline.js";
 export { Sparkline } from "./Sparkline/Sparkline.js";
+
+export type { RadialProgressProps } from "./RadialProgress/RadialProgress.js";
+export { RadialProgress } from "./RadialProgress/RadialProgress.js";

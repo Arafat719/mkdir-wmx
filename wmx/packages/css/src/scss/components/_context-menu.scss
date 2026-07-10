@@ -1,0 +1,10 @@
+// Reuses .wmx-dropdown-menu/.wmx-dropdown-item for the visuals; this only
+// swaps the positioning model from "anchored under a trigger" to "placed at
+// the cursor", which src/js/components/context-menu.js sets via inline
+// top/left on open.
+.wmx-context-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3000;
+}

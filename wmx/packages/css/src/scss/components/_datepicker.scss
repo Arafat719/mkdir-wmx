@@ -1,0 +1,86 @@
+@use "../abstracts/mixins";
+
+.wmx-datepicker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.wmx-datepicker-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2500;
+  width: 18rem;
+  background-color: var(--wmx-color-surface);
+  border: 1px solid var(--wmx-color-border);
+  border-radius: var(--wmx-radius-lg);
+  box-shadow: var(--wmx-shadow-lg);
+  padding: var(--wmx-space-4);
+  opacity: 0;
+  transform: translateY(4px) scale(0.98);
+  transition: opacity var(--wmx-transition-fast), transform var(--wmx-transition-fast);
+  pointer-events: none;
+}
+
+.wmx-datepicker-panel.wmx-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.wmx-datepicker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--wmx-space-3);
+}
+
+.wmx-datepicker-title {
+  font-size: var(--wmx-font-size-sm);
+  font-weight: 700;
+}
+
+.wmx-datepicker-weekdays,
+.wmx-datepicker-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--wmx-space-1);
+}
+
+.wmx-datepicker-weekdays {
+  margin-bottom: var(--wmx-space-2);
+  font-size: var(--wmx-font-size-xs);
+  color: var(--wmx-color-text-muted);
+  text-align: center;
+}
+
+.wmx-datepicker-day {
+  @include mixins.focus-ring;
+  aspect-ratio: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--wmx-font-size-sm);
+  color: var(--wmx-color-text);
+  border-radius: var(--wmx-radius-sm);
+  transition: background-color var(--wmx-transition-fast), color var(--wmx-transition-fast);
+
+  &:hover {
+    background-color: var(--wmx-color-surface-alt);
+  }
+
+  &.wmx-datepicker-day-muted {
+    color: var(--wmx-color-text-muted);
+    opacity: 0.5;
+  }
+
+  &.wmx-datepicker-day-today {
+    box-shadow: inset 0 0 0 1.5px var(--wmx-color-primary);
+  }
+
+  &.wmx-active {
+    background-color: var(--wmx-color-primary);
+    color: var(--wmx-color-on-primary);
+  }
+}

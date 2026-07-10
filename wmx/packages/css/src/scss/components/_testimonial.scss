@@ -1,0 +1,27 @@
+.wmx-testimonial {
+  padding: var(--wmx-space-5);
+  border-radius: var(--wmx-radius-lg);
+  background-color: var(--wmx-color-surface);
+  border: 1px solid var(--wmx-color-border);
+}
+
+.wmx-testimonial-quote {
+  color: var(--wmx-color-text);
+  margin-bottom: var(--wmx-space-4);
+}
+
+.wmx-testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: var(--wmx-space-3);
+}
+
+.wmx-testimonial-author-name {
+  font-weight: 600;
+  font-size: var(--wmx-font-size-sm);
+}
+
+.wmx-testimonial-author-role {
+  font-size: var(--wmx-font-size-xs);
+  color: var(--wmx-color-text-muted);
+}

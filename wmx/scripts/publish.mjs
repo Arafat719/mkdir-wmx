@@ -11,7 +11,7 @@ const PACKAGES = [
   { name: 'wmx-os-core',       dir: 'packages/core'       },
   { name: 'wmx-os-scanners',   dir: 'packages/scanners'   },
   { name: 'wmx-os-generators', dir: 'packages/generators' },
-  { name: 'wmx-ui',            dir: 'packages/ui'         },
+  { name: 'wmx-css',           dir: 'packages/css'        },
   { name: 'wmx-icons',         dir: 'packages/icons'      },
   { name: 'wmx-motion',        dir: 'packages/motion'     },
   { name: 'wmx-theme',         dir: 'packages/theme'      },

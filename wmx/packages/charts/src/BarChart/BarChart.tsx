@@ -21,9 +21,12 @@ export interface BarChartProps {
   width?: number;
   height?: number;
   valueFormatter?: (value: number) => string;
+  /** Stacks each group's series cumulatively instead of placing them side by side. */
+  stacked?: boolean;
 }
 
 const MAX_BAR_THICKNESS = 24;
+const MAX_STACKED_THICKNESS = 40;
 const BAR_GAP = 2;
 const PADDING = { top: 16, right: 16, bottom: 28, left: 44 };
 
@@ -35,6 +38,7 @@ export function BarChart({
   width = 480,
   height = 260,
   valueFormatter = formatTick,
+  stacked = false,
 }: BarChartProps) {
   const chrome = getChrome(theme);
   const palette = colors ?? getCategoricalColors(theme);
@@ -45,7 +49,9 @@ export function BarChart({
   const plotWidth = width - PADDING.left - PADDING.right;
   const plotHeight = height - PADDING.top - PADDING.bottom;
 
-  const rawMax = Math.max(0, ...data.flatMap((d) => d.values));
+  const rawMax = stacked
+    ? Math.max(0, ...data.map((d) => d.values.reduce((sum, v) => sum + v, 0)))
+    : Math.max(0, ...data.flatMap((d) => d.values));
   const { max, ticks } = niceScale(rawMax);
 
   const bandWidth = data.length > 0 ? plotWidth / data.length : plotWidth;
@@ -54,8 +60,9 @@ export function BarChart({
 
   const totalGap = BAR_GAP * Math.max(0, seriesCount - 1);
   const rawBarWidth = seriesCount > 0 ? (bandWidth - totalGap) / seriesCount : 0;
-  const barWidth = Math.max(1, Math.min(rawBarWidth, MAX_BAR_THICKNESS));
-  const groupContentWidth = barWidth * seriesCount + totalGap;
+  const groupedBarWidth = Math.max(1, Math.min(rawBarWidth, MAX_BAR_THICKNESS));
+  const groupContentWidth = groupedBarWidth * seriesCount + totalGap;
+  const stackedBarWidth = Math.min(bandWidth * 0.6, MAX_STACKED_THICKNESS);
 
   return (
     <div className="wmx-chart" style={{ width, background: chrome.surface }}>
@@ -81,12 +88,55 @@ export function BarChart({
 
         {data.map((datum, i) => {
           const groupX = PADDING.left + i * bandWidth;
+
+          if (stacked) {
+            const barX = groupX + (bandWidth - stackedBarWidth) / 2;
+            let cumulative = 0;
+
+            return (
+              <g key={datum.label}>
+                {datum.values.map((value, s) => {
+                  const y0 = yFor(cumulative);
+                  cumulative += value;
+                  const y1 = yFor(cumulative);
+                  const isTop = s === datum.values.length - 1;
+                  const color = palette[s % palette.length];
+
+                  return (
+                    <path
+                      key={s}
+                      d={roundedTopRectPath(barX, y1, stackedBarWidth, y0 - y1, isTop ? 4 : 0)}
+                      fill={color}
+                      onMouseMove={(e) => {
+                        const point = getRelativePoint(e);
+                        setTooltip({
+                          x: point.x,
+                          y: point.y,
+                          content: `${datum.label} · ${seriesNames[s]}: ${valueFormatter(value)}`,
+                        });
+                      }}
+                    />
+                  );
+                })}
+                <text
+                  x={groupX + bandWidth / 2}
+                  y={height - PADDING.bottom + 16}
+                  textAnchor="middle"
+                  fontSize={11}
+                  fill={chrome.muted}
+                >
+                  {datum.label}
+                </text>
+              </g>
+            );
+          }
+
           const startX = groupX + (bandWidth - groupContentWidth) / 2;
 
           return (
             <g key={datum.label}>
               {datum.values.map((value, s) => {
-                const barX = startX + s * (barWidth + BAR_GAP);
+                const barX = startX + s * (groupedBarWidth + BAR_GAP);
                 const barY = yFor(value);
                 const barHeight = baselineY - barY;
                 const color = palette[s % palette.length];
@@ -94,7 +144,7 @@ export function BarChart({
                 return (
                   <path
                     key={s}
-                    d={roundedTopRectPath(barX, barY, barWidth, barHeight, 4)}
+                    d={roundedTopRectPath(barX, barY, groupedBarWidth, barHeight, 4)}
                     fill={color}
                     onMouseMove={(e) => {
                       const point = getRelativePoint(e);

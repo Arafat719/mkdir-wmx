@@ -11,6 +11,8 @@ export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, "title
   isOpen: boolean;
   onClose: () => void;
   title?: ReactNode;
+  /** Action row docked to the bottom of the drawer, below the scrollable body. */
+  footer?: ReactNode;
   placement?: DrawerPlacement;
   closeOnOverlayClick?: boolean;
   closeOnEsc?: boolean;
@@ -21,6 +23,7 @@ export function Drawer({
   isOpen,
   onClose,
   title,
+  footer,
   placement = "right",
   closeOnOverlayClick = true,
   closeOnEsc = true,
@@ -55,6 +58,7 @@ export function Drawer({
           </button>
         </div>
         <div className="wmx-drawer__body">{children}</div>
+        {footer && <div className="wmx-drawer__footer">{footer}</div>}
       </div>
     </div>,
     document.body

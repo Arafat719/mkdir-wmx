@@ -1,0 +1,15 @@
+.wmx-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6em;
+  padding: 0.1em 0.5em;
+  font-family: var(--wmx-font-family-mono);
+  font-size: var(--wmx-font-size-xs);
+  font-weight: 600;
+  color: var(--wmx-color-text-muted);
+  background-color: var(--wmx-color-surface-alt);
+  border: 1px solid var(--wmx-color-border);
+  border-bottom-width: 2px;
+  border-radius: var(--wmx-radius-sm);
+}

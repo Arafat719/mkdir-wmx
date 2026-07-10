@@ -1,0 +1,34 @@
+@use "../abstracts/mixins";
+
+.wmx-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wmx-space-6);
+
+  @include mixins.breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.wmx-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--wmx-radius-lg);
+  background-color: var(--wmx-color-primary-subtle);
+  color: var(--wmx-color-primary);
+  font-size: var(--wmx-font-size-xl);
+  margin-bottom: var(--wmx-space-3);
+}
+
+.wmx-feature-title {
+  font-weight: 700;
+  margin-bottom: var(--wmx-space-2);
+}
+
+.wmx-feature-desc {
+  color: var(--wmx-color-text-muted);
+  font-size: var(--wmx-font-size-sm);
+}

@@ -1,0 +1,68 @@
+@use "../abstracts/mixins";
+
+.wmx-hero {
+  padding-block: var(--wmx-space-8);
+  text-align: center;
+}
+
+.wmx-hero p {
+  color: var(--wmx-color-text-muted);
+  max-width: 34rem;
+  margin-inline: auto;
+  margin-top: var(--wmx-space-3);
+}
+
+.wmx-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--wmx-space-3);
+  margin-top: var(--wmx-space-5);
+}
+
+// Variant: text left, visual right — stacks to one column below md.
+.wmx-hero-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: var(--wmx-space-7);
+  text-align: left;
+
+  p {
+    margin-inline: 0;
+  }
+
+  .wmx-hero-actions {
+    justify-content: flex-start;
+  }
+
+  @include mixins.breakpoint-up(md) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// Placeholder visual block for .wmx-hero-split — swap for a real image/illustration.
+.wmx-hero-visual {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--wmx-radius-lg);
+  border: 1px solid var(--wmx-color-border);
+  background: linear-gradient(135deg, var(--wmx-color-primary-subtle), var(--wmx-color-surface-alt));
+}
+
+// Variant: bold on-brand gradient background, derived from the same primary
+// HSL channels as the rest of the theme so it re-hues with everything else.
+.wmx-hero-gradient {
+  padding: var(--wmx-space-8) var(--wmx-space-5);
+  text-align: center;
+  border-radius: var(--wmx-radius-lg);
+  color: white;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--wmx-primary-h) var(--wmx-primary-s) var(--wmx-primary-l)),
+    hsl(calc(var(--wmx-primary-h) + 40) var(--wmx-primary-s) calc(var(--wmx-primary-l) - 12%))
+  );
+
+  p {
+    color: rgb(255 255 255 / 85%);
+  }
+}

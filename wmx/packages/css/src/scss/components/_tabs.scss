@@ -1,0 +1,35 @@
+@use "../abstracts/mixins";
+
+.wmx-tablist {
+  display: flex;
+  gap: var(--wmx-space-2);
+  border-bottom: 1px solid var(--wmx-color-border);
+}
+
+.wmx-tab {
+  @include mixins.focus-ring;
+  padding: var(--wmx-space-2) var(--wmx-space-4);
+  font-size: var(--wmx-font-size-sm);
+  font-weight: 600;
+  color: var(--wmx-color-text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color var(--wmx-transition-fast), border-color var(--wmx-transition-fast);
+
+  &:hover {
+    color: var(--wmx-color-text);
+  }
+
+  &[aria-selected="true"] {
+    color: var(--wmx-color-primary);
+    border-bottom-color: var(--wmx-color-primary);
+  }
+}
+
+.wmx-tabpanel {
+  padding-block: var(--wmx-space-4);
+
+  &[hidden] {
+    display: none;
+  }
+}

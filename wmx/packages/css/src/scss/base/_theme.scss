@@ -1,0 +1,103 @@
+@use "sass:map";
+@use "sass:list";
+@use "../abstracts/tokens";
+
+// ---------------------------------------------------------------------------
+// This is the theming core: raw scales + semantic aliases, all exposed as CSS
+// custom properties. Consumers can re-theme by overriding a handful of
+// semantic/primary variables on `:root` — no Sass recompile required.
+// ---------------------------------------------------------------------------
+
+@mixin dark-semantic-vars {
+  --wmx-color-bg: var(--wmx-gray-900);
+  --wmx-color-surface: var(--wmx-gray-800);
+  --wmx-color-surface-alt: var(--wmx-gray-700);
+  --wmx-color-border: var(--wmx-gray-700);
+  --wmx-color-text: var(--wmx-gray-50);
+  --wmx-color-text-muted: var(--wmx-gray-400);
+  --wmx-primary-l: 68%;
+  --wmx-color-primary-subtle: hsl(var(--wmx-primary-h) calc(var(--wmx-primary-s) - 35%) 22%);
+  --wmx-shadow-color: 0deg 0% 0%;
+  --wmx-color-inverse-surface: var(--wmx-gray-50);
+  --wmx-color-inverse-text: var(--wmx-gray-900);
+  --wmx-color-skeleton: var(--wmx-gray-700);
+  --wmx-color-skeleton-shine: var(--wmx-gray-600);
+}
+
+:root {
+  color-scheme: light;
+
+  // Raw: grayscale ramp
+  @each $step, $value in tokens.$grays {
+    --wmx-gray-#{$step}: #{$value};
+  }
+
+  // Raw: primary accent as HSL channels — override these 3 to re-theme the app.
+  --wmx-primary-h: #{tokens.$primary-h};
+  --wmx-primary-s: #{tokens.$primary-s};
+  --wmx-primary-l: #{tokens.$primary-l};
+
+  // Raw: spacing scale
+  @each $step, $value in tokens.$space-scale {
+    --wmx-space-#{$step}: #{$value};
+  }
+
+  // Raw: radius scale
+  @each $step, $value in tokens.$radius-scale {
+    --wmx-radius-#{$step}: #{$value};
+  }
+
+  // Raw: font-size scale
+  @each $step, $value in tokens.$font-sizes {
+    --wmx-font-size-#{$step}: #{$value};
+  }
+
+  --wmx-font-family-base: #{tokens.$font-family-base};
+  --wmx-font-family-mono: #{tokens.$font-family-mono};
+  --wmx-transition-fast: #{tokens.$transition-fast};
+  --wmx-transition-base: #{tokens.$transition-base};
+
+  --wmx-shadow-color: 220deg 20% 8%;
+  --wmx-shadow-sm: 0 1px 2px hsl(var(--wmx-shadow-color) / 0.08);
+  --wmx-shadow-md: 0 4px 12px hsl(var(--wmx-shadow-color) / 0.12);
+  --wmx-shadow-lg: 0 12px 32px hsl(var(--wmx-shadow-color) / 0.18);
+
+  // Semantic: derived live from the primary HSL channels above.
+  --wmx-color-primary: hsl(var(--wmx-primary-h) var(--wmx-primary-s) var(--wmx-primary-l));
+  --wmx-color-primary-hover: hsl(var(--wmx-primary-h) var(--wmx-primary-s) calc(var(--wmx-primary-l) - 8%));
+  --wmx-color-primary-active: hsl(var(--wmx-primary-h) var(--wmx-primary-s) calc(var(--wmx-primary-l) - 14%));
+  --wmx-color-primary-subtle: hsl(var(--wmx-primary-h) calc(var(--wmx-primary-s) - 20%) 95%);
+  --wmx-color-on-primary: white;
+
+  --wmx-color-success: hsl(#{list.nth(tokens.$success-hsl, 1)} #{list.nth(tokens.$success-hsl, 2)} #{list.nth(tokens.$success-hsl, 3)});
+  --wmx-color-warning: hsl(#{list.nth(tokens.$warning-hsl, 1)} #{list.nth(tokens.$warning-hsl, 2)} #{list.nth(tokens.$warning-hsl, 3)});
+  --wmx-color-danger: hsl(#{list.nth(tokens.$danger-hsl, 1)} #{list.nth(tokens.$danger-hsl, 2)} #{list.nth(tokens.$danger-hsl, 3)});
+  --wmx-color-info: hsl(#{list.nth(tokens.$info-hsl, 1)} #{list.nth(tokens.$info-hsl, 2)} #{list.nth(tokens.$info-hsl, 3)});
+
+  // Semantic: surface/text roles (light theme defaults)
+  --wmx-color-bg: var(--wmx-gray-50);
+  --wmx-color-surface: #ffffff;
+  --wmx-color-surface-alt: var(--wmx-gray-100);
+  --wmx-color-border: var(--wmx-gray-200);
+  --wmx-color-text: var(--wmx-gray-900);
+  --wmx-color-text-muted: var(--wmx-gray-600);
+  --wmx-color-ring: var(--wmx-color-primary);
+  --wmx-color-inverse-surface: var(--wmx-gray-900);
+  --wmx-color-inverse-text: white;
+  --wmx-color-skeleton: var(--wmx-gray-200);
+  --wmx-color-skeleton-shine: var(--wmx-gray-100);
+}
+
+// System preference, unless explicitly overridden with data-theme="light".
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    @include dark-semantic-vars;
+  }
+}
+
+// Explicit override, regardless of system preference.
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  @include dark-semantic-vars;
+}

@@ -1,0 +1,19 @@
+.wmx-logo-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wmx-space-7);
+}
+
+.wmx-logo-cloud-item {
+  font-size: var(--wmx-font-size-lg);
+  font-weight: 700;
+  color: var(--wmx-color-text-muted);
+  opacity: 0.7;
+  transition: opacity var(--wmx-transition-fast);
+
+  &:hover {
+    opacity: 1;
+  }
+}

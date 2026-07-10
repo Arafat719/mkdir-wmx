@@ -1,0 +1,27 @@
+.wmx-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wmx-space-4);
+  padding: var(--wmx-space-6);
+  border-radius: var(--wmx-radius-lg);
+  background-color: var(--wmx-color-primary);
+  color: white;
+}
+
+.wmx-cta-title {
+  font-size: var(--wmx-font-size-xl);
+  font-weight: 700;
+}
+
+.wmx-cta p {
+  margin: var(--wmx-space-1) 0 0;
+  color: rgb(255 255 255 / 85%);
+}
+
+.wmx-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wmx-space-3);
+}

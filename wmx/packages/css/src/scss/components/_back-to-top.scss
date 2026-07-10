@@ -1,0 +1,32 @@
+@use "../abstracts/mixins";
+
+.wmx-back-to-top {
+  @include mixins.focus-ring;
+  position: fixed;
+  right: var(--wmx-space-5);
+  bottom: var(--wmx-space-5);
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--wmx-color-primary);
+  color: var(--wmx-color-on-primary);
+  box-shadow: var(--wmx-shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity var(--wmx-transition-base), transform var(--wmx-transition-base), visibility var(--wmx-transition-base), background-color var(--wmx-transition-fast);
+  z-index: 900;
+
+  &.wmx-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    background-color: var(--wmx-color-primary-hover);
+  }
+}

@@ -1,0 +1,30 @@
+@use "../abstracts/mixins";
+@use "../abstracts/tokens";
+
+$grid-columns: 12;
+
+.wmx-row {
+  display: grid;
+  grid-template-columns: repeat($grid-columns, minmax(0, 1fr));
+  gap: var(--wmx-space-4);
+}
+
+@for $i from 1 through $grid-columns {
+  .wmx-col-#{$i} {
+    grid-column: span #{$i} / span #{$i};
+  }
+}
+
+.wmx-col {
+  grid-column: span $grid-columns / span $grid-columns;
+}
+
+@each $bp, $_ in tokens.$breakpoints {
+  @include mixins.breakpoint-up($bp) {
+    @for $i from 1 through $grid-columns {
+      .wmx-col-#{$bp}-#{$i} {
+        grid-column: span #{$i} / span #{$i};
+      }
+    }
+  }
+}

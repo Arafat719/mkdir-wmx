@@ -1,0 +1,25 @@
+@use "../abstracts/mixins";
+
+.wmx-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--wmx-space-6);
+  text-align: center;
+
+  @include mixins.breakpoint-up(md) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wmx-stat-value {
+  font-size: var(--wmx-font-size-3xl);
+  font-weight: 700;
+  color: var(--wmx-color-primary);
+  line-height: 1.1;
+}
+
+.wmx-stat-label {
+  margin-top: var(--wmx-space-1);
+  font-size: var(--wmx-font-size-sm);
+  color: var(--wmx-color-text-muted);
+}

@@ -1,0 +1,12 @@
+.wmx-spinner {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--wmx-color-border);
+  border-right-color: var(--wmx-color-primary);
+  border-radius: 50%;
+  animation: wmx-spin 0.6s linear infinite;
+}
+
+.wmx-spinner-sm { width: 0.875rem; height: 0.875rem; border-width: 2px; }
+.wmx-spinner-lg { width: 2rem; height: 2rem; border-width: 3px; }

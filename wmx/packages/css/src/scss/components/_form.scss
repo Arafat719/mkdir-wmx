@@ -1,0 +1,259 @@
+@use "../abstracts/mixins";
+
+.wmx-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wmx-space-2);
+  margin-bottom: var(--wmx-space-4);
+}
+
+.wmx-label {
+  font-size: var(--wmx-font-size-sm);
+  font-weight: 600;
+}
+
+.wmx-help-text {
+  font-size: var(--wmx-font-size-xs);
+  color: var(--wmx-color-text-muted);
+}
+
+.wmx-input,
+.wmx-select,
+.wmx-textarea {
+  @include mixins.focus-ring;
+  width: 100%;
+  padding: var(--wmx-space-2) var(--wmx-space-3);
+  font-size: var(--wmx-font-size-sm);
+  color: var(--wmx-color-text);
+  background-color: var(--wmx-color-surface);
+  border: 1px solid var(--wmx-color-border);
+  border-radius: var(--wmx-radius-md);
+  transition: border-color var(--wmx-transition-fast), box-shadow var(--wmx-transition-fast);
+
+  &::placeholder {
+    color: var(--wmx-color-text-muted);
+  }
+
+  &:hover {
+    border-color: var(--wmx-color-primary);
+  }
+
+  &:focus-visible {
+    border-color: var(--wmx-color-primary);
+    box-shadow: 0 0 0 3px var(--wmx-color-primary-subtle);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.wmx-textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+// Validation states, applied via class (framework-agnostic — works without :user-invalid support)
+.wmx-input-invalid,
+.wmx-select-invalid,
+.wmx-textarea-invalid {
+  border-color: var(--wmx-color-danger);
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--wmx-color-danger) 18%, transparent);
+  }
+}
+
+.wmx-field-error {
+  font-size: var(--wmx-font-size-xs);
+  color: var(--wmx-color-danger);
+}
+
+// Checkbox / radio
+.wmx-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wmx-space-2);
+  cursor: pointer;
+}
+
+.wmx-check-input {
+  @include mixins.focus-ring;
+  appearance: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 1.5px solid var(--wmx-color-border);
+  background-color: var(--wmx-color-surface);
+  display: inline-grid;
+  place-content: center;
+  transition: background-color var(--wmx-transition-fast), border-color var(--wmx-transition-fast);
+  flex-shrink: 0;
+
+  &[type="checkbox"] { border-radius: 5px; }
+  &[type="radio"] { border-radius: 50%; }
+
+  &::before {
+    content: "";
+    width: 0.6rem;
+    height: 0.6rem;
+    transform: scale(0);
+    transition: transform var(--wmx-transition-fast);
+    box-shadow: inset 1em 1em white;
+  }
+
+  &[type="checkbox"]::before {
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
+  &[type="radio"]::before {
+    border-radius: 50%;
+  }
+
+  &:checked {
+    background-color: var(--wmx-color-primary);
+    border-color: var(--wmx-color-primary);
+
+    &::before {
+      transform: scale(1);
+    }
+  }
+}
+
+// Switch
+.wmx-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wmx-space-2);
+  cursor: pointer;
+}
+
+.wmx-switch-input {
+  @include mixins.focus-ring;
+  appearance: none;
+  width: 2.25rem;
+  height: 1.25rem;
+  border-radius: var(--wmx-radius-full);
+  background-color: var(--wmx-color-border);
+  position: relative;
+  transition: background-color var(--wmx-transition-fast);
+  flex-shrink: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: var(--wmx-shadow-sm);
+    transition: transform var(--wmx-transition-fast);
+  }
+
+  &:checked {
+    background-color: var(--wmx-color-primary);
+
+    &::before {
+      transform: translateX(1rem);
+    }
+  }
+}
+
+// Input group — glue an input to buttons/addons with shared borders.
+.wmx-input-group {
+  display: flex;
+  align-items: stretch;
+
+  > .wmx-input,
+  > .wmx-select {
+    flex: 1;
+    border-radius: 0;
+  }
+
+  > .wmx-btn {
+    border-radius: 0;
+  }
+
+  > :first-child {
+    border-top-left-radius: var(--wmx-radius-md);
+    border-bottom-left-radius: var(--wmx-radius-md);
+  }
+
+  > :last-child {
+    border-top-right-radius: var(--wmx-radius-md);
+    border-bottom-right-radius: var(--wmx-radius-md);
+  }
+
+  > :not(:first-child) {
+    margin-inline-start: -1px;
+  }
+
+  > .wmx-input-addon {
+    display: inline-flex;
+    align-items: center;
+    padding-inline: var(--wmx-space-3);
+    background-color: var(--wmx-color-surface-alt);
+    border: 1px solid var(--wmx-color-border);
+    color: var(--wmx-color-text-muted);
+    font-size: var(--wmx-font-size-sm);
+  }
+
+  > * {
+    position: relative;
+  }
+
+  > *:focus,
+  > *:focus-within {
+    z-index: 1;
+  }
+}
+
+// Range slider
+.wmx-range {
+  @include mixins.focus-ring;
+  appearance: none;
+  width: 100%;
+  height: 1.25rem;
+  background: transparent;
+
+  &::-webkit-slider-runnable-track {
+    height: 0.375rem;
+    border-radius: var(--wmx-radius-full);
+    background-color: var(--wmx-color-surface-alt);
+  }
+
+  &::-moz-range-track {
+    height: 0.375rem;
+    border-radius: var(--wmx-radius-full);
+    background-color: var(--wmx-color-surface-alt);
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    margin-top: -0.4375rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 50%;
+    background-color: var(--wmx-color-primary);
+    border: 3px solid var(--wmx-color-surface);
+    box-shadow: var(--wmx-shadow-sm);
+    cursor: pointer;
+    transition: transform var(--wmx-transition-fast);
+  }
+
+  &::-moz-range-thumb {
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 50%;
+    background-color: var(--wmx-color-primary);
+    border: 3px solid var(--wmx-color-surface);
+    box-shadow: var(--wmx-shadow-sm);
+    cursor: pointer;
+    transition: transform var(--wmx-transition-fast);
+  }
+
+  &:active::-webkit-slider-thumb { transform: scale(1.15); }
+  &:active::-moz-range-thumb { transform: scale(1.15); }
+}

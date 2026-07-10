@@ -1,0 +1,21 @@
+@use "../abstracts/tokens";
+
+$sides: (
+  "": "",
+  t: "-top",
+  b: "-bottom",
+  s: "-inline-start",
+  e: "-inline-end",
+  x: "-inline",
+  y: "-block",
+);
+
+@each $step, $_ in tokens.$space-scale {
+  @each $side, $suffix in $sides {
+    .wmx-m#{$side}-#{$step} { margin#{$suffix}: var(--wmx-space-#{$step}); }
+    .wmx-p#{$side}-#{$step} { padding#{$suffix}: var(--wmx-space-#{$step}); }
+  }
+}
+
+.wmx-m-auto { margin: auto; }
+.wmx-mx-auto { margin-inline: auto; }

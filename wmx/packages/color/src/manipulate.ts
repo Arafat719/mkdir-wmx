@@ -24,3 +24,9 @@ export function mix(hexA: string, hexB: string, weight = 0.5): string {
     a.b + (b.b - a.b) * w
   );
 }
+
+/** Returns an `rgba(r, g, b, alpha)` string for the given hex color. */
+export function withAlpha(hex: string, alpha = 1): string {
+  const { r, g, b } = hexToRgb(hex);
+  return `rgba(${r}, ${g}, ${b}, ${clamp(alpha, 0, 1)})`;
+}

@@ -51,6 +51,8 @@
 }
 
 .wmx-toast {
+  position: relative;
+  overflow: hidden;
   pointer-events: auto;
   display: flex;
   align-items: flex-start;
@@ -112,12 +114,77 @@
   color: #111827;
 }
 
+.wmx-toast__action {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.wmx-toast__spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(107, 114, 128, 0.25);
+  border-top-color: #4b5563;
+  animation: wmx-toast-spin 0.7s linear infinite;
+}
+
+@keyframes wmx-toast-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.wmx-toast__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.wmx-toast__progress-bar {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  background: currentColor;
+  animation-name: wmx-toast-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.wmx-toast:hover .wmx-toast__progress-bar {
+  animation-play-state: paused;
+}
+
+@keyframes wmx-toast-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
 .wmx-toast--info {
   border-color: #bfdbfe;
 }
 .wmx-toast--info .wmx-toast__icon {
   background-color: #bfdbfe;
   color: #1e40af;
+}
+.wmx-toast--info .wmx-toast__progress-bar {
+  color: #2563eb;
 }
 
 .wmx-toast--success {
@@ -127,6 +194,9 @@
   background-color: #bbf7d0;
   color: #166534;
 }
+.wmx-toast--success .wmx-toast__progress-bar {
+  color: #16a34a;
+}
 
 .wmx-toast--warning {
   border-color: #fde68a;
@@ -135,6 +205,9 @@
   background-color: #fde68a;
   color: #92400e;
 }
+.wmx-toast--warning .wmx-toast__progress-bar {
+  color: #d97706;
+}
 
 .wmx-toast--error {
   border-color: #fecaca;
@@ -142,6 +215,16 @@
 .wmx-toast--error .wmx-toast__icon {
   background-color: #fecaca;
   color: #991b1b;
+}
+.wmx-toast--error .wmx-toast__progress-bar {
+  color: #dc2626;
+}
+
+.wmx-toast--loading {
+  border-color: #e5e7eb;
+}
+.wmx-toast--loading .wmx-toast__icon {
+  background-color: #e5e7eb;
 }
 
 @keyframes wmx-toast-in {
@@ -157,6 +240,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .wmx-toast {
+    animation: none;
+  }
+  .wmx-toast__progress-bar {
+    animation: none;
+  }
+  .wmx-toast__spinner {
     animation: none;
   }
 }

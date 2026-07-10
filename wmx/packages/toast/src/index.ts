@@ -5,4 +5,6 @@ export type {
   ToastPosition,
   ToastProviderProps,
   ToastContextValue,
+  ToastAction,
+  PromiseToastOptions,
 } from "./ToastProvider.js";

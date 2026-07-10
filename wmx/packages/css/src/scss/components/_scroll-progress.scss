@@ -1,0 +1,10 @@
+.wmx-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5000;
+  width: 0%;
+  height: 3px;
+  background-color: var(--wmx-color-primary);
+  transition: width 80ms linear;
+}

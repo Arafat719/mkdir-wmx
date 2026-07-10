@@ -1,0 +1,33 @@
+body {
+  font-family: var(--wmx-font-family-base);
+  font-size: var(--wmx-font-size-base);
+  color: var(--wmx-color-text);
+  background-color: var(--wmx-color-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 { font-size: var(--wmx-font-size-4xl); }
+h2 { font-size: var(--wmx-font-size-3xl); }
+h3 { font-size: var(--wmx-font-size-2xl); }
+h4 { font-size: var(--wmx-font-size-xl); }
+h5 { font-size: var(--wmx-font-size-lg); }
+h6 { font-size: var(--wmx-font-size-base); }
+
+small, .wmx-text-sm { font-size: var(--wmx-font-size-sm); }
+
+.wmx-text-muted { color: var(--wmx-color-text-muted); }
+
+code, kbd, pre, samp {
+  font-family: var(--wmx-font-family-mono);
+  font-size: 0.9em;
+}
+
+code {
+  background: var(--wmx-color-surface-alt);
+  padding: 0.15em 0.4em;
+  border-radius: var(--wmx-radius-sm);
+}

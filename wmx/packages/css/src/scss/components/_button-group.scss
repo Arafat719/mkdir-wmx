@@ -1,0 +1,33 @@
+.wmx-btn-group {
+  display: inline-flex;
+
+  .wmx-btn {
+    border-radius: 0;
+  }
+
+  .wmx-btn:not(:first-child) {
+    margin-inline-start: -1px;
+  }
+
+  .wmx-btn:first-child {
+    border-start-start-radius: var(--wmx-radius-md);
+    border-end-start-radius: var(--wmx-radius-md);
+  }
+
+  .wmx-btn:last-child {
+    border-start-end-radius: var(--wmx-radius-md);
+    border-end-end-radius: var(--wmx-radius-md);
+  }
+
+  .wmx-btn:hover,
+  .wmx-btn:focus-visible {
+    z-index: 1;
+  }
+
+  // Segmented / toggle-group usage: mark the selected button with .wmx-active.
+  .wmx-btn.wmx-active {
+    background-color: var(--wmx-color-primary);
+    border-color: var(--wmx-color-primary);
+    color: var(--wmx-color-on-primary);
+  }
+}

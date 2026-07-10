@@ -1,0 +1,35 @@
+.wmx-popover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2500;
+  width: max-content;
+  max-width: 20rem;
+  background-color: var(--wmx-color-surface);
+  border: 1px solid var(--wmx-color-border);
+  border-radius: var(--wmx-radius-lg);
+  box-shadow: var(--wmx-shadow-lg);
+  opacity: 0;
+  transform: translateY(4px) scale(0.98);
+  transition: opacity var(--wmx-transition-fast), transform var(--wmx-transition-fast);
+  pointer-events: none;
+}
+
+.wmx-popover.wmx-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.wmx-popover-header {
+  padding: var(--wmx-space-3) var(--wmx-space-4);
+  border-bottom: 1px solid var(--wmx-color-border);
+  font-weight: 700;
+  font-size: var(--wmx-font-size-sm);
+}
+
+.wmx-popover-body {
+  padding: var(--wmx-space-4);
+  font-size: var(--wmx-font-size-sm);
+  color: var(--wmx-color-text-muted);
+}

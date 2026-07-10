@@ -1,0 +1,61 @@
+@use "../abstracts/mixins";
+
+.wmx-accordion {
+  border: 1px solid var(--wmx-color-border);
+  border-radius: var(--wmx-radius-lg);
+  overflow: hidden;
+}
+
+.wmx-accordion-item + .wmx-accordion-item {
+  border-top: 1px solid var(--wmx-color-border);
+}
+
+.wmx-accordion-trigger {
+  @include mixins.focus-ring;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wmx-space-3);
+  width: 100%;
+  padding: var(--wmx-space-4) var(--wmx-space-5);
+  font-weight: 600;
+  text-align: left;
+  background-color: var(--wmx-color-surface);
+  transition: background-color var(--wmx-transition-fast);
+
+  &:hover {
+    background-color: var(--wmx-color-surface-alt);
+  }
+}
+
+.wmx-accordion-icon {
+  flex-shrink: 0;
+  transition: transform var(--wmx-transition-base);
+
+  .wmx-accordion-trigger[aria-expanded="true"] & {
+    transform: rotate(180deg);
+  }
+}
+
+// Height-animates via the CSS grid-rows trick — no JS height measurement needed.
+.wmx-accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--wmx-transition-base);
+}
+
+.wmx-accordion-panel.wmx-open {
+  grid-template-rows: 1fr;
+}
+
+.wmx-accordion-body {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 var(--wmx-space-5);
+  color: var(--wmx-color-text-muted);
+  font-size: var(--wmx-font-size-sm);
+}
+
+.wmx-accordion-panel.wmx-open .wmx-accordion-body {
+  padding-block: 0 var(--wmx-space-4);
+}

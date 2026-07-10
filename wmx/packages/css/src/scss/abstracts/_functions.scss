@@ -1,0 +1,9 @@
+@use "sass:map";
+
+// Safe map lookup with a clear error instead of a silent `null`.
+@function token($map, $key) {
+  @if not map.has-key($map, $key) {
+    @error "Token `#{$key}` not found in map.";
+  }
+  @return map.get($map, $key);
+}

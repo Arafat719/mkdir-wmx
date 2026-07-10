@@ -35,6 +35,35 @@
   margin-bottom: 20px;
 }
 
+.wmx-confirm__error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin: -8px 0 20px;
+}
+
+.wmx-confirm__spinner {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  margin-right: 2px;
+  vertical-align: -2px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  animation: wmx-confirm-spin 0.7s linear infinite;
+}
+
+@keyframes wmx-confirm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .wmx-confirm__actions {
   display: flex;
   justify-content: flex-end;
@@ -77,6 +106,11 @@
   background-color: #b91c1c;
 }
 
+.wmx-confirm__btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 @keyframes wmx-confirm-fade {
   from {
     opacity: 0;
@@ -99,6 +133,9 @@
 @media (prefers-reduced-motion: reduce) {
   .wmx-confirm-overlay,
   .wmx-confirm {
+    animation: none;
+  }
+  .wmx-confirm__spinner {
     animation: none;
   }
 }

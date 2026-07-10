@@ -1,0 +1,27 @@
+.wmx-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--wmx-space-2);
+  padding: var(--wmx-space-8) var(--wmx-space-4);
+  color: var(--wmx-color-text-muted);
+}
+
+.wmx-empty-state-icon {
+  font-size: var(--wmx-font-size-4xl);
+  margin-bottom: var(--wmx-space-2);
+  opacity: 0.8;
+}
+
+.wmx-empty-state-title {
+  color: var(--wmx-color-text);
+  font-weight: 700;
+  font-size: var(--wmx-font-size-lg);
+}
+
+.wmx-empty-state-actions {
+  margin-top: var(--wmx-space-3);
+  display: flex;
+  gap: var(--wmx-space-3);
+}

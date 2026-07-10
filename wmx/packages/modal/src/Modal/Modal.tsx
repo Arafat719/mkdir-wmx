@@ -11,6 +11,8 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"
   isOpen: boolean;
   onClose: () => void;
   title?: ReactNode;
+  /** Action row docked to the bottom of the dialog, below the scrollable body. */
+  footer?: ReactNode;
   size?: ModalSize;
   closeOnOverlayClick?: boolean;
   closeOnEsc?: boolean;
@@ -21,6 +23,7 @@ export function Modal({
   isOpen,
   onClose,
   title,
+  footer,
   size = "md",
   closeOnOverlayClick = true,
   closeOnEsc = true,
@@ -55,6 +58,7 @@ export function Modal({
           </button>
         </div>
         <div className="wmx-dialog__body">{children}</div>
+        {footer && <div className="wmx-dialog__footer">{footer}</div>}
       </div>
     </div>,
     document.body

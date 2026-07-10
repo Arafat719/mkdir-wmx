@@ -1,0 +1,22 @@
+.wmx-divider {
+  border: none;
+  border-top: 1px solid var(--wmx-color-border);
+  margin: var(--wmx-space-5) 0;
+}
+
+.wmx-divider-text {
+  display: flex;
+  align-items: center;
+  gap: var(--wmx-space-3);
+  margin: var(--wmx-space-5) 0;
+  color: var(--wmx-color-text-muted);
+  font-size: var(--wmx-font-size-xs);
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--wmx-color-border);
+  }
+}

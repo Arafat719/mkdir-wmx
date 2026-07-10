@@ -1,0 +1,19 @@
+.wmx-chart {
+  position: relative;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.wmx-chart svg {
+  display: block;
+  max-width: 100%;
+}
+
+.wmx-radial-progress__bar {
+  transition: stroke-dashoffset 0.2s ease, stroke 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmx-radial-progress__bar {
+    transition: none;
+  }
+}

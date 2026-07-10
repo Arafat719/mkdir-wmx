@@ -1,0 +1,17 @@
+.wmx-sortable-handle {
+  flex-shrink: 0;
+  color: var(--wmx-color-text-muted);
+  cursor: grab;
+}
+
+[data-wmx-sortable] > .wmx-dragging {
+  opacity: 0.4;
+}
+
+[data-wmx-sortable] > .wmx-drag-over-top {
+  box-shadow: inset 0 2px 0 var(--wmx-color-primary);
+}
+
+[data-wmx-sortable] > .wmx-drag-over-bottom {
+  box-shadow: inset 0 -2px 0 var(--wmx-color-primary);
+}

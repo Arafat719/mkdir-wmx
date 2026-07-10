@@ -1,0 +1,18 @@
+@use "../abstracts/mixins";
+
+.wmx-container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--wmx-space-4);
+
+  @include mixins.breakpoint-up(sm) { max-width: 540px; }
+  @include mixins.breakpoint-up(md) { max-width: 720px; }
+  @include mixins.breakpoint-up(lg) { max-width: 960px; }
+  @include mixins.breakpoint-up(xl) { max-width: 1140px; }
+  @include mixins.breakpoint-up(xxl) { max-width: 1320px; }
+}
+
+.wmx-container-fluid {
+  width: 100%;
+  padding-inline: var(--wmx-space-4);
+}

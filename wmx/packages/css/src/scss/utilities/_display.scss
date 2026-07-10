@@ -1,0 +1,16 @@
+@use "../abstracts/mixins";
+@use "../abstracts/tokens";
+
+$display-values: none, block, inline, inline-block, flex, grid;
+
+@each $value in $display-values {
+  .wmx-d-#{$value} { display: #{$value}; }
+}
+
+@each $bp, $_ in tokens.$breakpoints {
+  @include mixins.breakpoint-up($bp) {
+    @each $value in $display-values {
+      .wmx-d-#{$bp}-#{$value} { display: #{$value}; }
+    }
+  }
+}

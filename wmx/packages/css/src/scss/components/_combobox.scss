@@ -1,0 +1,50 @@
+.wmx-combobox {
+  position: relative;
+}
+
+.wmx-combobox-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2500;
+  min-width: 12rem;
+  max-height: 16rem;
+  overflow-y: auto;
+  margin: 0;
+  list-style: none;
+  background-color: var(--wmx-color-surface);
+  border: 1px solid var(--wmx-color-border);
+  border-radius: var(--wmx-radius-md);
+  box-shadow: var(--wmx-shadow-lg);
+  padding: var(--wmx-space-2);
+  opacity: 0;
+  transform: translateY(4px) scale(0.98);
+  transition: opacity var(--wmx-transition-fast), transform var(--wmx-transition-fast);
+  pointer-events: none;
+}
+
+.wmx-combobox-menu.wmx-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.wmx-combobox-option {
+  padding: var(--wmx-space-2) var(--wmx-space-3);
+  font-size: var(--wmx-font-size-sm);
+  border-radius: var(--wmx-radius-sm);
+  color: var(--wmx-color-text);
+  cursor: pointer;
+  transition: background-color var(--wmx-transition-fast);
+
+  &:hover,
+  &.wmx-active {
+    background-color: var(--wmx-color-surface-alt);
+  }
+}
+
+.wmx-combobox-empty {
+  padding: var(--wmx-space-2) var(--wmx-space-3);
+  font-size: var(--wmx-font-size-sm);
+  color: var(--wmx-color-text-muted);
+}

@@ -1,0 +1,48 @@
+@use "../abstracts/mixins";
+
+// Read-only display — pure CSS, supports fractional values via a clipped
+// overlay. Set --wmx-rating-value (0–5, decimals allowed) inline.
+.wmx-rating {
+  position: relative;
+  display: inline-flex;
+  font-size: var(--wmx-font-size-lg);
+  line-height: 1;
+  letter-spacing: 0.15em;
+  color: var(--wmx-color-border);
+}
+
+.wmx-rating-track,
+.wmx-rating-fill {
+  white-space: nowrap;
+}
+
+.wmx-rating-fill {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  width: calc(var(--wmx-rating-value, 0) / 5 * 100%);
+  color: var(--wmx-color-warning);
+}
+
+// Interactive input — one button per star, click/arrow-key to set.
+.wmx-rating-input {
+  display: inline-flex;
+  gap: var(--wmx-space-1);
+}
+
+.wmx-rating-input-star {
+  @include mixins.focus-ring;
+  font-size: var(--wmx-font-size-xl);
+  line-height: 1;
+  color: var(--wmx-color-border);
+  border-radius: var(--wmx-radius-sm);
+  transition: color var(--wmx-transition-fast), transform var(--wmx-transition-fast);
+
+  &:hover {
+    transform: scale(1.15);
+  }
+
+  &.wmx-rating-input-star-filled {
+    color: var(--wmx-color-warning);
+  }
+}

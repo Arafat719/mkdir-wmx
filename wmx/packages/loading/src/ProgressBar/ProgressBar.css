@@ -1,0 +1,74 @@
+.wmx-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.wmx-progress__label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wmx-progress__label {
+  font-size: 13px;
+  color: #374151;
+}
+
+.wmx-progress__value {
+  font-family: inherit;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.wmx-progress__track {
+  width: 100%;
+  border-radius: 999px;
+  background-color: #e5e7eb;
+  overflow: hidden;
+}
+
+.wmx-progress__track--sm {
+  height: 6px;
+}
+
+.wmx-progress__track--md {
+  height: 9px;
+}
+
+.wmx-progress__track--lg {
+  height: 14px;
+}
+
+.wmx-progress__bar {
+  height: 100%;
+  border-radius: 999px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.wmx-progress__bar--indeterminate {
+  width: 40%;
+  transition: none;
+  animation: wmx-progress-slide 1.2s ease-in-out infinite;
+}
+
+@keyframes wmx-progress-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmx-progress__bar--indeterminate {
+    animation-duration: 3s;
+  }
+  .wmx-progress__bar {
+    transition: none;
+  }
+}

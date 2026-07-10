@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { createRoot } from "react-dom/client";
 import "./Confirm.css";
@@ -9,6 +9,12 @@ export interface ConfirmOptions {
   confirmText?: string;
   cancelText?: string;
   variant?: "default" | "danger";
+  /**
+   * If provided, the confirm button runs this itself instead of resolving immediately: it
+   * shows a spinner and disables both buttons while pending, and if it throws, the dialog
+   * stays open with the error shown inline so the user can retry.
+   */
+  onConfirm?: () => void | Promise<void>;
 }
 
 interface ConfirmDialogProps extends ConfirmOptions {
@@ -21,18 +27,43 @@ function ConfirmDialog({
   confirmText = "Confirm",
   cancelText = "Cancel",
   variant = "default",
+  onConfirm,
   onResolve,
 }: ConfirmDialogProps) {
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onResolve(false);
+      if (e.key === "Escape" && !busy) onResolve(false);
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [onResolve]);
+  }, [onResolve, busy]);
+
+  const handleCancel = () => {
+    if (busy) return;
+    onResolve(false);
+  };
+
+  const handleConfirm = () => {
+    if (!onConfirm) {
+      onResolve(true);
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    Promise.resolve()
+      .then(() => onConfirm())
+      .then(() => onResolve(true))
+      .catch((err: unknown) => {
+        setBusy(false);
+        setError(err instanceof Error ? err.message : String(err));
+      });
+  };
 
   return createPortal(
-    <div className="wmx-confirm-overlay" onClick={() => onResolve(false)}>
+    <div className="wmx-confirm-overlay" onClick={handleCancel}>
       <div
         className="wmx-confirm"
         role="alertdialog"
@@ -41,19 +72,23 @@ function ConfirmDialog({
       >
         <div className="wmx-confirm__title">{title}</div>
         {description && <div className="wmx-confirm__description">{description}</div>}
+        {error && <div className="wmx-confirm__error">{error}</div>}
         <div className="wmx-confirm__actions">
           <button
             type="button"
             className="wmx-confirm__btn wmx-confirm__btn--cancel"
-            onClick={() => onResolve(false)}
+            onClick={handleCancel}
+            disabled={busy}
           >
             {cancelText}
           </button>
           <button
             type="button"
             className={`wmx-confirm__btn wmx-confirm__btn--${variant === "danger" ? "danger" : "confirm"}`}
-            onClick={() => onResolve(true)}
+            onClick={handleConfirm}
+            disabled={busy}
           >
+            {busy && <span className="wmx-confirm__spinner" aria-hidden="true" />}
             {confirmText}
           </button>
         </div>

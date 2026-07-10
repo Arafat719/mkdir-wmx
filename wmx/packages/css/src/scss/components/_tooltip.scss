@@ -1,0 +1,23 @@
+.wmx-tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3000;
+  max-width: 16rem;
+  padding: var(--wmx-space-1) var(--wmx-space-3);
+  background-color: var(--wmx-color-inverse-surface);
+  color: var(--wmx-color-inverse-text);
+  font-size: var(--wmx-font-size-xs);
+  line-height: 1.4;
+  border-radius: var(--wmx-radius-sm);
+  box-shadow: var(--wmx-shadow-md);
+  opacity: 0;
+  transform: translateY(4px) scale(0.98);
+  transition: opacity var(--wmx-transition-fast), transform var(--wmx-transition-fast);
+  pointer-events: none;
+}
+
+.wmx-tooltip.wmx-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}

@@ -1,0 +1,23 @@
+.wmx-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wmx-space-1);
+  padding: 0.2em 0.65em;
+  font-size: var(--wmx-font-size-xs);
+  font-weight: 600;
+  border-radius: var(--wmx-radius-full);
+  background-color: var(--wmx-color-surface-alt);
+  color: var(--wmx-color-text);
+}
+
+.wmx-badge-primary { background-color: var(--wmx-color-primary); color: var(--wmx-color-on-primary); }
+.wmx-badge-success { background-color: var(--wmx-color-success); color: white; }
+.wmx-badge-warning { background-color: var(--wmx-color-warning); color: black; }
+.wmx-badge-danger { background-color: var(--wmx-color-danger); color: white; }
+
+.wmx-badge-dot {
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background-color: currentColor;
+}

@@ -1,0 +1,63 @@
+.wmx-stepper {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wmx-step {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: var(--wmx-space-3);
+  color: var(--wmx-color-text-muted);
+  font-size: var(--wmx-font-size-sm);
+
+  &:not(:last-child)::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background-color: var(--wmx-color-border);
+    margin-inline: var(--wmx-space-2);
+  }
+}
+
+.wmx-step-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--wmx-color-border);
+  font-size: var(--wmx-font-size-xs);
+  font-weight: 700;
+  transition: background-color var(--wmx-transition-fast), border-color var(--wmx-transition-fast), color var(--wmx-transition-fast);
+}
+
+.wmx-step-label {
+  white-space: nowrap;
+}
+
+.wmx-step.wmx-active {
+  color: var(--wmx-color-text);
+  font-weight: 600;
+
+  .wmx-step-index {
+    border-color: var(--wmx-color-primary);
+    color: var(--wmx-color-primary);
+  }
+}
+
+.wmx-step.wmx-completed {
+  .wmx-step-index {
+    background-color: var(--wmx-color-primary);
+    border-color: var(--wmx-color-primary);
+    color: var(--wmx-color-on-primary);
+  }
+
+  &:not(:last-child)::after {
+    background-color: var(--wmx-color-primary);
+  }
+}

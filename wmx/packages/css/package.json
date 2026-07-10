@@ -1,0 +1,23 @@
+{
+  "name": "wmx-css",
+  "version": "0.1.1",
+  "description": "A smarter, prettier CSS framework - design tokens, runtime theming, and accessible components. No build step required to use.",
+  "license": "MIT",
+  "main": "dist/wmx.js",
+  "style": "dist/wmx.css",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "build:watch": "node build.mjs --watch",
+    "dev": "node build.mjs --watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
+    "esbuild": "^0.24.2",
+    "postcss": "^8.4.49",
+    "sass": "^1.83.0"
+  }
+}

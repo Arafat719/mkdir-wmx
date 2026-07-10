@@ -1,0 +1,29 @@
+@use "../abstracts/mixins";
+
+.wmx-otp-input {
+  display: inline-flex;
+  gap: var(--wmx-space-2);
+}
+
+.wmx-otp-digit {
+  @include mixins.focus-ring;
+  width: 2.75rem;
+  height: 3rem;
+  text-align: center;
+  font-size: var(--wmx-font-size-lg);
+  font-weight: 700;
+  color: var(--wmx-color-text);
+  background-color: var(--wmx-color-surface);
+  border: 1px solid var(--wmx-color-border);
+  border-radius: var(--wmx-radius-md);
+  transition: border-color var(--wmx-transition-fast), box-shadow var(--wmx-transition-fast);
+
+  &:hover {
+    border-color: var(--wmx-color-primary);
+  }
+
+  &:focus-visible {
+    border-color: var(--wmx-color-primary);
+    box-shadow: 0 0 0 3px var(--wmx-color-primary-subtle);
+  }
+}

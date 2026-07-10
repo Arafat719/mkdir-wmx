@@ -1,0 +1,91 @@
+.wmx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--wmx-font-size-sm);
+
+  th,
+  td {
+    padding: var(--wmx-space-3) var(--wmx-space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--wmx-color-border);
+  }
+
+  th {
+    font-size: var(--wmx-font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--wmx-color-text-muted);
+  }
+}
+
+.wmx-table-striped tbody tr:nth-child(odd) {
+  background-color: var(--wmx-color-surface-alt);
+}
+
+.wmx-table-hover tbody tr {
+  transition: background-color var(--wmx-transition-fast);
+
+  &:hover {
+    background-color: var(--wmx-color-surface-alt);
+  }
+}
+
+.wmx-table-container {
+  overflow-x: auto;
+  border: 1px solid var(--wmx-color-border);
+  border-radius: var(--wmx-radius-lg);
+
+  .wmx-table {
+    border: none;
+  }
+
+  .wmx-table th:first-child,
+  .wmx-table td:first-child {
+    padding-inline-start: var(--wmx-space-5);
+  }
+}
+
+// Sortable column header (see src/js/components/table.js) — the arrow reflects
+// the native aria-sort attribute, so it stays correct even if you set it
+// server-side for the initial sort state.
+.wmx-table th[data-wmx-sort] {
+  position: relative;
+  padding-right: var(--wmx-space-6);
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: var(--wmx-color-text);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--wmx-color-ring);
+    outline-offset: -2px;
+  }
+
+  &::after {
+    content: "↕";
+    position: absolute;
+    right: var(--wmx-space-3);
+    opacity: 0.35;
+  }
+
+  &[aria-sort="ascending"]::after {
+    content: "↑";
+    opacity: 1;
+    color: var(--wmx-color-primary);
+  }
+
+  &[aria-sort="descending"]::after {
+    content: "↓";
+    opacity: 1;
+    color: var(--wmx-color-primary);
+  }
+}
+
+.wmx-table-empty td {
+  padding: var(--wmx-space-5);
+  text-align: center;
+  color: var(--wmx-color-text-muted);
+}

@@ -1,4 +1,5 @@
 import { hexToHsl, hslToHex } from "./convert.js";
+import { getReadableTextColor } from "./contrast.js";
 
 const SHADE_STEPS = {
   "50": 97,
@@ -42,5 +43,35 @@ export function generateHarmony(baseHex: string): ColorHarmony {
     complementary: rotate(180),
     analogous: [rotate(-30), rotate(30)],
     triadic: [rotate(120), rotate(240)],
+  };
+}
+
+export interface GeneratedTheme {
+  primary: string;
+  onPrimary: "#000000" | "#ffffff";
+  primaryShades: ShadeScale;
+  secondary: string;
+  onSecondary: "#000000" | "#ffffff";
+  accent: string;
+  onAccent: "#000000" | "#ffffff";
+}
+
+/**
+ * The capstone palette builder — one call away from a full, readable UI theme. Runs
+ * generateHarmony() to pick a secondary and accent from the base hue, generateShades()
+ * for the primary's 50–950 scale, and getReadableTextColor() on each so the "on*"
+ * colors are always legible.
+ */
+export function generateTheme(baseHex: string): GeneratedTheme {
+  const harmony = generateHarmony(baseHex);
+  const accent = harmony.triadic[0];
+  return {
+    primary: baseHex,
+    onPrimary: getReadableTextColor(baseHex),
+    primaryShades: generateShades(baseHex),
+    secondary: harmony.complementary,
+    onSecondary: getReadableTextColor(harmony.complementary),
+    accent,
+    onAccent: getReadableTextColor(accent),
   };
 }

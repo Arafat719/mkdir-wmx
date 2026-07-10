@@ -1,0 +1,90 @@
+@use "../abstracts/mixins";
+
+.wmx-footer {
+  background-color: var(--wmx-color-surface-alt);
+  border-top: 1px solid var(--wmx-color-border);
+}
+
+.wmx-footer-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--wmx-space-6);
+  padding: var(--wmx-space-7) var(--wmx-space-4);
+}
+
+.wmx-footer-brand {
+  font-weight: 700;
+  font-size: var(--wmx-font-size-lg);
+  margin-bottom: var(--wmx-space-3);
+}
+
+.wmx-footer-col-title {
+  font-size: var(--wmx-font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wmx-color-text-muted);
+  margin-bottom: var(--wmx-space-3);
+}
+
+.wmx-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wmx-space-2);
+}
+
+.wmx-footer-link {
+  font-size: var(--wmx-font-size-sm);
+  color: var(--wmx-color-text-muted);
+  transition: color var(--wmx-transition-fast);
+
+  &:hover {
+    color: var(--wmx-color-text);
+  }
+}
+
+.wmx-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wmx-space-3);
+  padding: var(--wmx-space-4);
+  border-top: 1px solid var(--wmx-color-border);
+  font-size: var(--wmx-font-size-xs);
+  color: var(--wmx-color-text-muted);
+}
+
+.wmx-footer-social {
+  display: flex;
+  gap: var(--wmx-space-3);
+
+  a {
+    color: var(--wmx-color-text-muted);
+    transition: color var(--wmx-transition-fast);
+
+    &:hover {
+      color: var(--wmx-color-primary);
+    }
+  }
+}
+
+// Variant: single row (brand + inline links) instead of the multi-column
+// grid — drop in place of .wmx-footer-top.
+.wmx-footer-minimal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wmx-space-4);
+  padding: var(--wmx-space-5) var(--wmx-space-4);
+
+  .wmx-footer-brand {
+    margin-bottom: 0;
+  }
+
+  .wmx-footer-links {
+    flex-direction: row;
+    gap: var(--wmx-space-5);
+  }
+}

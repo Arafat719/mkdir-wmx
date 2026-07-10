@@ -1,6 +1,9 @@
 packages:
   - "packages/*"
   - "apps/*"
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
 minimumReleaseAgeExclude:
   - wmx-os-core@0.1.0
   - wmx-os-generators@0.1.0

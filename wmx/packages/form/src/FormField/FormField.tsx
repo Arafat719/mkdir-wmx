@@ -8,6 +8,10 @@ export interface FormFieldProps {
   touched?: boolean;
   hint?: ReactNode;
   required?: boolean;
+  /** Leading glyph rendered inside the control, e.g. an icon from wmx-icons. */
+  icon?: ReactNode;
+  /** Trailing slot inside the control — a show/hide toggle, an inline spinner, a checkmark. */
+  endAdornment?: ReactNode;
   children: ReactNode;
 }
 
@@ -18,6 +22,8 @@ export function FormField({
   touched = true,
   hint,
   required,
+  icon,
+  endAdornment,
   children,
 }: FormFieldProps) {
   const showError = Boolean(error) && touched;
@@ -30,7 +36,11 @@ export function FormField({
           {required && <span className="wmx-form-field__required">*</span>}
         </label>
       )}
-      {children}
+      <div className={`wmx-form-field__control${icon ? " has-icon" : ""}${endAdornment ? " has-end" : ""}`}>
+        {icon && <span className="wmx-form-field__icon">{icon}</span>}
+        {children}
+        {endAdornment && <span className="wmx-form-field__end">{endAdornment}</span>}
+      </div>
       {showError ? (
         <span className="wmx-form-field__error">{error}</span>
       ) : hint ? (

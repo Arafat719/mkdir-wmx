@@ -1,0 +1,48 @@
+.wmx-toast-region {
+  position: fixed;
+  bottom: var(--wmx-space-5);
+  right: var(--wmx-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wmx-space-3);
+  z-index: 2000;
+  width: min(22rem, calc(100vw - var(--wmx-space-5) * 2));
+}
+
+.wmx-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--wmx-space-3);
+  padding: var(--wmx-space-4);
+  background-color: var(--wmx-color-surface);
+  border: 1px solid var(--wmx-color-border);
+  border-radius: var(--wmx-radius-md);
+  box-shadow: var(--wmx-shadow-lg);
+  font-size: var(--wmx-font-size-sm);
+  animation: wmx-toast-in var(--wmx-transition-base);
+
+  &.wmx-toast-leaving {
+    animation: wmx-toast-out var(--wmx-transition-base) forwards;
+  }
+}
+
+.wmx-toast-success { border-left: 3px solid var(--wmx-color-success); }
+.wmx-toast-warning { border-left: 3px solid var(--wmx-color-warning); }
+.wmx-toast-danger { border-left: 3px solid var(--wmx-color-danger); }
+.wmx-toast-info { border-left: 3px solid var(--wmx-color-info); }
+
+.wmx-toast-body { flex: 1; }
+
+.wmx-toast-close {
+  opacity: 0.6;
+  &:hover { opacity: 1; }
+}
+
+@keyframes wmx-toast-in {
+  from { opacity: 0; transform: translateX(1rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes wmx-toast-out {
+  to { opacity: 0; transform: translateX(1rem); }
+}
